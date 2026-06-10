@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lion Mining – Viagens</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',sans-serif;background:linear-gradient(135deg,#667eea,#764ba2);min-height:100vh;padding:10px}
+.wrap{max-width:520px;margin:0 auto;background:#fff;border-radius:15px;box-shadow:0 20px 60px rgba(0,0,0,.3);overflow:hidden}
+.header{background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;padding:18px;text-align:center}
+.header h1{font-size:22px;margin-bottom:2px}
+.header p{font-size:12px;opacity:.85}
+.syncbar{background:#1a1a2e;color:#fff;font-size:11px;padding:7px 14px;display:flex;align-items:center;gap:8px;min-height:30px}
+.dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;transition:.3s}
+.dot.ok{background:#4caf50}
+.dot.busy{background:#ffc107;animation:blink .7s infinite}
+.dot.err{background:#f44336}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.tabs{display:flex;background:#f8f9fa;border-bottom:2px solid #eee}
+.tb{flex:1;padding:11px 2px;background:none;border:none;cursor:pointer;font-weight:600;font-size:11px;color:#666;border-bottom:3px solid transparent;margin-bottom:-2px;transition:.2s}
+.tb.on{color:#667eea;border-bottom-color:#667eea;background:#fff}
+.pane{display:none;padding:18px;anim
