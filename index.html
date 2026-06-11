@@ -27,7 +27,7 @@ body{font-family:'Segoe UI',sans-serif;background:linear-gradient(135deg,#667eea
 .fg{margin-bottom:13px}
 label{display:block;margin-bottom:5px;font-weight:600;color:#333;font-size:13px}
 input,select{width:100%;padding:11px;border:2px solid #ddd;border-radius:8px;font-size:14px;font-family:inherit;transition:.2s}
-input:focus,select:focus{outline:none;border-color:#667eea;box-shadow:0 0 0 3px rgba(102,126,234,.1)}
+input:focus{outline:none;border-color:#667eea;box-shadow:0 0 0 3px rgba(102,126,234,.1)}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .btn{width:100%;padding:12px;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-size:14px;transition:.2s;margin-top:7px}
 .bp{background:linear-gradient(135deg,#667eea,#764ba2);color:#fff}
@@ -69,6 +69,7 @@ input:focus,select:focus{outline:none;border-color:#667eea;box-shadow:0 0 0 3px 
 .spin{display:inline-block;width:13px;height:13px;border:2px solid #ddd;border-top-color:#667eea;border-radius:50%;animation:sp .7s linear infinite;margin-right:5px;vertical-align:middle}
 @keyframes sp{to{transform:rotate(360deg)}}
 .exprow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.btn-row{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
 </style>
 </head>
 <body>
@@ -89,6 +90,7 @@ input:focus,select:focus{outline:none;border-color:#667eea;box-shadow:0 0 0 3px 
     <button class="tb"    onclick="goTab('exp',this)">💾 Export</button>
   </div>
 
+  <!-- ENTRADA -->
   <div id="ent" class="pane on">
     <div id="aent"></div>
     <div class="ib iblue">✅ Registre a chegada do caminhão ao pátio</div>
@@ -105,6 +107,7 @@ input:focus,select:focus{outline:none;border-color:#667eea;box-shadow:0 0 0 3px 
     <p style="font-size:11px;color:#999;text-align:center;margin-top:10px">🌐 Dados salvos no Firebase — compartilhados em tempo real</p>
   </div>
 
+  <!-- SAÍDA -->
   <div id="sai" class="pane">
     <div id="asai"></div>
     <div class="ib iyellow">⚠️ Selecione o caminhão e registre a saída</div>
@@ -112,6 +115,7 @@ input:focus,select:focus{outline:none;border-color:#667eea;box-shadow:0 0 0 3px 
     <div id="pendlist"></div>
   </div>
 
+  <!-- HISTÓRICO -->
   <div id="his" class="pane">
     <div class="srch"><input id="shis" placeholder="🔍 Buscar placa…" oninput="renderHist()"></div>
     <div class="frow">
@@ -123,6 +127,7 @@ input:focus,select:focus{outline:none;border-color:#667eea;box-shadow:0 0 0 3px 
     <div id="histlist"></div>
   </div>
 
+  <!-- STATS -->
   <div id="sta" class="pane">
     <div class="fg" style="margin-bottom:14px">
       <label>📅 Filtrar por dia</label>
@@ -132,6 +137,7 @@ input:focus,select:focus{outline:none;border-color:#667eea;box-shadow:0 0 0 3px 
     <div id="statsbox"></div>
   </div>
 
+  <!-- EXPORT -->
   <div id="exp" class="pane">
     <div class="ib iblue"><strong>📊 Exportar Dados</strong><br><span style="color:#444">Exporte para Excel ou CSV.</span></div>
     <div class="exprow">
@@ -143,6 +149,7 @@ input:focus,select:focus{outline:none;border-color:#667eea;box-shadow:0 0 0 3px 
   </div>
 </div>
 
+<!-- MODAL SAÍDA -->
 <div class="modal" id="msai">
   <div class="mbox">
     <span class="mcl" onclick="closeModal()">✕</span>
@@ -158,11 +165,13 @@ input:focus,select:focus{outline:none;border-color:#667eea;box-shadow:0 0 0 3px 
   </div>
 </div>
 
+<!-- MODAL EDITAR -->
 <div class="modal" id="medit">
   <div class="mbox">
     <span class="mcl" onclick="closeEditModal()">✕</span>
     <h2 style="margin-bottom:14px;color:#333">✏️ Editar Viagem</h2>
-    <div class="fg"><label>🔶 Placa *</label><input id="ed-placa" maxlength="10" style="text-transform:uppercase"></div>
+    <div class="fg"><label>🔶 Placa *</label>
+      <input id="ed-placa" maxlength="10" style="text-transform:uppercase"></div>
     <div class="row2">
       <div class="fg"><label>📅 Data Chegada *</label><input type="date" id="ed-dch"></div>
       <div class="fg"><label>🕐 Hora Chegada *</label><input type="time" id="ed-hch"></div>
@@ -171,7 +180,8 @@ input:focus,select:focus{outline:none;border-color:#667eea;box-shadow:0 0 0 3px 
       <div class="fg"><label>📅 Data Saída *</label><input type="date" id="ed-dsa"></div>
       <div class="fg"><label>🕐 Hora Saída *</label><input type="time" id="ed-hsa"></div>
     </div>
-    <div class="fg"><label>⚖️ Peso (kg)</label><input type="number" id="ed-peso" step="100" min="0"></div>
+    <div class="fg"><label>⚖️ Peso (kg)</label>
+      <input type="number" id="ed-peso" step="100" min="0"></div>
     <div class="fg"><label>📝 Nota Entrada</label><input id="ed-nent"></div>
     <div class="fg"><label>📝 Nota Saída</label><input id="ed-nsai"></div>
     <div class="ib iblue">⏱️ Tempo calculado: <strong id="ed-tempo">--</strong> min</div>
@@ -181,30 +191,33 @@ input:focus,select:focus{outline:none;border-color:#667eea;box-shadow:0 0 0 3px 
 </div>
 
 <script>
+// ── FIREBASE ──────────────────────────────────────────────────────────
 const FB = 'https://lion-416b7-default-rtdb.firebaseio.com';
 
 async function fbGet(p){
-  const r = await fetch(FB+'/'+p+'.json');
+  const r=await fetch(FB+'/'+p+'.json');
   if(!r.ok) throw new Error('HTTP '+r.status);
   return r.json();
 }
 async function fbPost(p,d){
-  const r = await fetch(FB+'/'+p+'.json',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)});
+  const r=await fetch(FB+'/'+p+'.json',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)});
+  if(!r.ok) throw new Error('HTTP '+r.status);
+  return r.json();
+}
+async function fbPut(p,d){
+  const r=await fetch(FB+'/'+p+'.json',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)});
   if(!r.ok) throw new Error('HTTP '+r.status);
   return r.json();
 }
 async function fbDelete(p){
-  const r = await fetch(FB+'/'+p+'.json',{method:'DELETE'});
+  const r=await fetch(FB+'/'+p+'.json',{method:'DELETE'});
   if(!r.ok) throw new Error('HTTP '+r.status);
-}
-async function fbPut(p,d){
-  const r = await fetch(FB+'/'+p+'.json',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)});
-  if(!r.ok) throw new Error('HTTP '+r.status);
-  return r.json();
 }
 
+// ── ESTADO ────────────────────────────────────────────────────────────
 let entradas=[],viagens=[],filtro='todos',modalKey=null,editKey=null;
 
+// ── SYNC ──────────────────────────────────────────────────────────────
 function sync(s,m){
   document.getElementById('sdot').className='dot '+s;
   document.getElementById('smsg').textContent=m;
@@ -230,6 +243,7 @@ setInterval(async()=>{
 
 (async()=>{document.getElementById('edata').value=hoje();await load();})();
 
+// ── TABS ──────────────────────────────────────────────────────────────
 async function goTab(id,btn){
   document.querySelectorAll('.pane').forEach(p=>p.classList.remove('on'));
   document.querySelectorAll('.tb').forEach(b=>b.classList.remove('on'));
@@ -241,12 +255,14 @@ async function goTab(id,btn){
   if(id==='sta')renderStats();
 }
 
+// ── ALERTAS ───────────────────────────────────────────────────────────
 function alerta(c,m,t='as'){
   const el=document.getElementById(c);
   el.innerHTML='<div class="alert '+t+'">'+m+'</div>';
   setTimeout(()=>el.innerHTML='',4000);
 }
 
+// ── ENTRADA ───────────────────────────────────────────────────────────
 async function registrarEntrada(){
   const placa=document.getElementById('eplaca').value.trim().toUpperCase();
   const data=document.getElementById('edata').value;
@@ -270,6 +286,7 @@ function limparEntrada(){
   document.getElementById('edata').value=hoje();
 }
 
+// ── LISTA EM ANDAMENTO ────────────────────────────────────────────────
 function renderPend(){
   const q=(document.getElementById('ssai').value||'').toUpperCase();
   const list=entradas.filter(e=>!q||e.placa.includes(q));
@@ -277,12 +294,16 @@ function renderPend(){
   if(!list.length){c.innerHTML='<div class="empty"><div class="ei">📭</div>Nenhum caminhão em andamento</div>';return;}
   c.innerHTML=list.map(e=>{
     const min=Math.round((Date.now()-new Date(e.ts))/60000);
-    return '<div class="card pend"><div class="ch">'+e.placa+' <span class="badge bwarn">'+min+' min</span></div>'
-      +'<div class="cg"><div class="ci"><div class="cl">Chegada</div><div class="cv">'+e.data+' '+e.hora+'</div></div>'
-      +'<div class="ci"><div class="cl">Aguardando</div><div class="cv">'+min+' min</div></div></div>'
+    return '<div class="card pend">'
+      +'<div class="ch">'+e.placa+' <span class="badge bwarn">'+min+' min</span></div>'
+      +'<div class="cg">'
+      +'<div class="ci"><div class="cl">Chegada</div><div class="cv">'+e.data+' '+e.hora+'</div></div>'
+      +'<div class="ci"><div class="cl">Aguardando</div><div class="cv">'+min+' min</div></div>'
+      +'</div>'
       +(e.nota?'<div class="note">📝 '+e.nota+'</div>':'')
       +'<button class="btn bp" onclick="openModal(\''+e._key+'\')" style="font-size:12px;padding:8px;margin-top:8px">📤 Registrar Saída</button>'
-      +'<button class="btn bd" onclick="cancelarEntrada(\''+e._key+'\')" style="font-size:11px;padding:6px;margin-top:5px">🗑️ Cancelar</button></div>';
+      +'<button class="btn bd" onclick="cancelarEntrada(\''+e._key+'\')" style="font-size:11px;padding:6px;margin-top:5px">🗑️ Cancelar</button>'
+      +'</div>';
   }).join('');
 }
 
@@ -292,6 +313,7 @@ async function cancelarEntrada(key){
   catch(e){alerta('asai','❌ Erro: '+e.message,'ae');}
 }
 
+// ── MODAL SAÍDA ───────────────────────────────────────────────────────
 function openModal(key){
   const ent=entradas.find(e=>e._key===key);
   if(!ent)return;
@@ -332,57 +354,7 @@ async function confirmarSaida(){
   setBusy('bsai',false);
 }
 
-function setFil(f,btn){
-  filtro=f;
-  document.querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));
-  btn.classList.add('on');
-  renderHist();
-}
-
-function filtrar(l){
-  if(filtro==='todos')return l;
-  if(filtro==='hoje')return l.filter(v=>new Date(v.ts).toDateString()===new Date().toDateString());
-  const lim=filtro==='semana'?7:30;
-  return l.filter(v=>(Date.now()-new Date(v.ts))<=lim*86400000);
-}
-
-function renderHist(){
-  const q=(document.getElementById('shis').value||'').toUpperCase();
-  const lista=filtrar(viagens.filter(v=>!q||v.placa.includes(q)));
-  const c=document.getElementById('histlist');
-  if(!lista.length){c.innerHTML='<div class="empty"><div class="ei">📭</div>Nenhuma viagem no período</div>';return;}
-  c.innerHTML=lista.map(v=>{
-    const tons=v.peso_kg?(v.peso_kg/1000).toFixed(2)+' t':'N/A';
-    return '<div class="card"><div class="ch">'+v.placa+' <span class="badge bok">'+v.tempo_min+' min</span></div>'
-      +'<div class="cg">'
-      +'<div class="ci"><div class="cl">Chegada</div><div class="cv">'+v.data_chegada+' '+v.hora_chegada+'</div></div>'
-      +'<div class="ci"><div class="cl">Saída</div><div class="cv">'+v.data_saida+' '+v.hora_saida+'</div></div>'
-      +'<div class="ci"><div class="cl">Peso</div><div class="cv">'+tons+'</div></div>'
-      +'<div class="ci"><div class="cl">Tempo</div><div class="cv">'+v.tempo_min+' min</div></div>'
-      +'</div>'
-      +(v.nota_entrada?'<div class="note">📥 '+v.nota_entrada+'</div>':'')
-      +(v.nota_saida?'<div class="note">📤 '+v.nota_saida+'</div>':'')
-      +'<div class="note">Registrado: '+new Date(v.ts).toLocaleString('pt-BR')+'</div>'
-      +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px">'
-      +'<button class="btn bp" onclick="openEditModal(\''+v._key+'\')" style="font-size:11px;padding:6px">✏️ Editar</button>'
-      +'<button class="btn bd" onclick="deletarViagem(\''+v._key+'\')" style="font-size:11px;padding:6px">🗑️ Deletar</button>'
-      +'</div></div>';
-  }).join('');
-}
-
-async function deletarViagem(key){
-  if(!confirm('Deletar esta viagem?'))return;
-  try{await fbDelete('viagens/'+key);await load();renderHist();renderStats();}
-  catch(e){alert('Erro: '+e.message);}
-}
-
-function renderStats(){
-  const c=document.getElementById('statsbox');
-  const filtData=document.getElementById('stats-data').value;
-
-  let lista=viagens;
-  if(filtData) lista=viagens.filter(v=>v.data_saida===filtData);
-
+// ── MODAL EDITAR ──────────────────────────────────────────────────────
 function openEditModal(key){
   const v=viagens.find(v=>v._key===key);
   if(!v)return;
@@ -398,7 +370,10 @@ function openEditModal(key){
   const calc=()=>{
     const dc=document.getElementById('ed-dch').value,hc=document.getElementById('ed-hch').value;
     const ds=document.getElementById('ed-dsa').value,hs=document.getElementById('ed-hsa').value;
-    if(dc&&hc&&ds&&hs){const d=(new Date(ds+'T'+hs)-new Date(dc+'T'+hc))/60000;document.getElementById('ed-tempo').textContent=d>=0?Math.round(d):'❌ Inválido';}
+    if(dc&&hc&&ds&&hs){
+      const d=(new Date(ds+'T'+hs)-new Date(dc+'T'+hc))/60000;
+      document.getElementById('ed-tempo').textContent=d>=0?Math.round(d):'❌ Inválido';
+    }
   };
   calc();
   ['ed-dch','ed-hch','ed-dsa','ed-hsa'].forEach(id=>document.getElementById(id).oninput=calc);
@@ -431,12 +406,60 @@ async function salvarEdicao(){
   setBusy('bed',false);
 }
 
-function setBusy(id,busy){
-  const btn=document.getElementById(id);
-  btn.disabled=busy;
-  const labels={'bentrada':'✅ Registrar Entrada','bsai':'✅ Confirmar Saída','bed':'💾 Salvar Alterações'};
-  btn.innerHTML=busy?'<span class="spin"></span>Salvando…':labels[id];
+// ── HISTÓRICO ─────────────────────────────────────────────────────────
+function setFil(f,btn){
+  filtro=f;
+  document.querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));
+  btn.classList.add('on');
+  renderHist();
 }
+
+function filtrar(l){
+  if(filtro==='todos')return l;
+  if(filtro==='hoje')return l.filter(v=>new Date(v.ts).toDateString()===new Date().toDateString());
+  const lim=filtro==='semana'?7:30;
+  return l.filter(v=>(Date.now()-new Date(v.ts))<=lim*86400000);
+}
+
+function renderHist(){
+  const q=(document.getElementById('shis').value||'').toUpperCase();
+  const lista=filtrar(viagens.filter(v=>!q||v.placa.includes(q)));
+  const c=document.getElementById('histlist');
+  if(!lista.length){c.innerHTML='<div class="empty"><div class="ei">📭</div>Nenhuma viagem no período</div>';return;}
+  c.innerHTML=lista.map(v=>{
+    const tons=v.peso_kg?(v.peso_kg/1000).toFixed(2)+' t':'N/A';
+    return '<div class="card">'
+      +'<div class="ch">'+v.placa+' <span class="badge bok">'+v.tempo_min+' min</span></div>'
+      +'<div class="cg">'
+      +'<div class="ci"><div class="cl">Chegada</div><div class="cv">'+v.data_chegada+' '+v.hora_chegada+'</div></div>'
+      +'<div class="ci"><div class="cl">Saída</div><div class="cv">'+v.data_saida+' '+v.hora_saida+'</div></div>'
+      +'<div class="ci"><div class="cl">Peso</div><div class="cv">'+tons+'</div></div>'
+      +'<div class="ci"><div class="cl">Tempo</div><div class="cv">'+v.tempo_min+' min</div></div>'
+      +'</div>'
+      +(v.nota_entrada?'<div class="note">📥 '+v.nota_entrada+'</div>':'')
+      +(v.nota_saida?'<div class="note">📤 '+v.nota_saida+'</div>':'')
+      +'<div class="note">Registrado: '+new Date(v.ts).toLocaleString('pt-BR')+'</div>'
+      +'<div class="btn-row">'
+      +'<button class="btn bp" onclick="openEditModal(\''+v._key+'\')" style="font-size:11px;padding:6px">✏️ Editar</button>'
+      +'<button class="btn bd" onclick="deletarViagem(\''+v._key+'\')" style="font-size:11px;padding:6px">🗑️ Deletar</button>'
+      +'</div>'
+      +'</div>';
+  }).join('');
+}
+
+async function deletarViagem(key){
+  if(!confirm('Deletar esta viagem?'))return;
+  try{await fbDelete('viagens/'+key);await load();renderHist();renderStats();}
+  catch(e){alert('Erro: '+e.message);}
+}
+
+// ── STATS ─────────────────────────────────────────────────────────────
+function renderStats(){
+  const c=document.getElementById('statsbox');
+  const filtData=document.getElementById('stats-data').value;
+
+  // Contabiliza pelo dia de SAÍDA
+  let lista=filtData?viagens.filter(v=>v.data_saida===filtData):viagens;
 
   if(!lista.length){
     c.innerHTML='<div class="empty"><div class="ei">📊</div>'+(filtData?'Nenhuma viagem neste dia':'Nenhum dado ainda')+'</div>';
@@ -448,16 +471,14 @@ function setBusy(id,busy){
   const tmed=Math.round(lista.reduce((s,v)=>s+v.tempo_min,0)/tot);
   const cnt={};lista.forEach(v=>cnt[v.placa]=(cnt[v.placa]||0)+1);
   const [tp,tq]=Object.entries(cnt).sort((a,b)=>b[1]-a[1])[0];
-
-  const mais_rapida=lista.reduce((a,b)=>a.tempo_min<b.tempo_min?a:b);
-  const mais_longa =lista.reduce((a,b)=>a.tempo_min>b.tempo_min?a:b);
-
-  const periodoLabel=filtData
-    ? '📅 Mostrando dados de: <strong>'+new Date(filtData+'T12:00:00').toLocaleDateString('pt-BR')+'</strong>'
-    : '📅 Mostrando <strong>todos os dias</strong>';
+  const rapida=lista.reduce((a,b)=>a.tempo_min<b.tempo_min?a:b);
+  const longa =lista.reduce((a,b)=>a.tempo_min>b.tempo_min?a:b);
+  const label=filtData
+    ?'📅 Dados de: <strong>'+new Date(filtData+'T12:00:00').toLocaleDateString('pt-BR')+'</strong>'
+    :'📅 Mostrando <strong>todos os dias</strong>';
 
   c.innerHTML=
-    '<div class="ib iblue" style="margin-bottom:14px">'+periodoLabel+'</div>'
+    '<div class="ib iblue" style="margin-bottom:14px">'+label+'</div>'
     +'<div class="sg">'
     +'<div class="sc"><div class="sl">VIAGENS</div><div class="sv">'+tot+'</div></div>'
     +'<div class="sc"><div class="sl">PLACAS</div><div class="sv">'+plcs+'</div></div>'
@@ -465,24 +486,25 @@ function setBusy(id,busy){
     +'<div class="sc"><div class="sl">TEMPO MÉDIO</div><div class="sv">'+tmed+'</div><div class="sl">minutos</div></div>'
     +'</div>'
     +'<div class="ib iblue">🏆 <strong>Maior frequência:</strong> '+tp+' — '+tq+' viagem'+(tq>1?'s':'')+'</div>'
-    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px">'
+    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px">'
     +'<div style="background:#e8f5e9;border-left:4px solid #4caf50;padding:12px;border-radius:8px">'
-    +'<div style="font-size:11px;color:#2e7d32;font-weight:600">⚡ VIAGEM MAIS RÁPIDA</div>'
-    +'<div style="font-size:22px;font-weight:700;color:#2e7d32;margin:4px 0">'+mais_rapida.tempo_min+' min</div>'
-    +'<div style="font-size:11px;color:#555">🔶 '+mais_rapida.placa+'</div>'
-    +'<div style="font-size:11px;color:#555">📅 '+mais_rapida.data_chegada+'</div>'
-    +'<div style="font-size:11px;color:#555">🕐 '+mais_rapida.hora_chegada+' → '+mais_rapida.hora_saida+'</div>'
+    +'<div style="font-size:11px;color:#2e7d32;font-weight:600">⚡ MAIS RÁPIDA</div>'
+    +'<div style="font-size:22px;font-weight:700;color:#2e7d32;margin:4px 0">'+rapida.tempo_min+' min</div>'
+    +'<div style="font-size:11px;color:#555">🔶 '+rapida.placa+'</div>'
+    +'<div style="font-size:11px;color:#555">📅 '+rapida.data_saida+'</div>'
+    +'<div style="font-size:11px;color:#555">🕐 '+rapida.hora_chegada+' → '+rapida.hora_saida+'</div>'
     +'</div>'
     +'<div style="background:#fff3e0;border-left:4px solid #ff9800;padding:12px;border-radius:8px">'
-    +'<div style="font-size:11px;color:#e65100;font-weight:600">🐢 VIAGEM MAIS LONGA</div>'
-    +'<div style="font-size:22px;font-weight:700;color:#e65100;margin:4px 0">'+mais_longa.tempo_min+' min</div>'
-    +'<div style="font-size:11px;color:#555">🔶 '+mais_longa.placa+'</div>'
-    +'<div style="font-size:11px;color:#555">📅 '+mais_longa.data_chegada+'</div>'
-    +'<div style="font-size:11px;color:#555">🕐 '+mais_longa.hora_chegada+' → '+mais_longa.hora_saida+'</div>'
+    +'<div style="font-size:11px;color:#e65100;font-weight:600">🐢 MAIS LONGA</div>'
+    +'<div style="font-size:22px;font-weight:700;color:#e65100;margin:4px 0">'+longa.tempo_min+' min</div>'
+    +'<div style="font-size:11px;color:#555">🔶 '+longa.placa+'</div>'
+    +'<div style="font-size:11px;color:#555">📅 '+longa.data_saida+'</div>'
+    +'<div style="font-size:11px;color:#555">🕐 '+longa.hora_chegada+' → '+longa.hora_saida+'</div>'
     +'</div>'
     +'</div>';
 }
 
+// ── EXPORT ────────────────────────────────────────────────────────────
 function buildRows(){
   return viagens.map(v=>({'Placa':v.placa,'Data Chegada':v.data_chegada,'Hora Chegada':v.hora_chegada,
     'Data Saída':v.data_saida,'Hora Saída':v.hora_saida,'Peso (kg)':v.peso_kg||'',
@@ -518,8 +540,10 @@ async function clearAll(){
 
 function setBusy(id,busy){
   const btn=document.getElementById(id);
+  if(!btn)return;
   btn.disabled=busy;
-  btn.innerHTML=busy?'<span class="spin"></span>Salvando…':(id==='bentrada'?'✅ Registrar Entrada':'✅ Confirmar Saída');
+  const labels={'bentrada':'✅ Registrar Entrada','bsai':'✅ Confirmar Saída','bed':'💾 Salvar Alterações'};
+  btn.innerHTML=busy?'<span class="spin"></span>Salvando…':labels[id];
 }
 </script>
 </body>
