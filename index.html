@@ -440,8 +440,8 @@ function renderHist(){
       +(v.nota_saida?'<div class="note">📤 '+v.nota_saida+'</div>':'')
       +'<div class="note">Registrado: '+new Date(v.ts).toLocaleString('pt-BR')+'</div>'
       +'<div class="btn-row">'
-      +'<button class="btn bp" onclick="openEditModal(\''+v._key+'\')" style="font-size:11px;padding:6px">✏️ Editar</button>'
-      +'<button class="btn bd" onclick="deletarViagem(\''+v._key+'\')" style="font-size:11px;padding:6px">🗑️ Deletar</button>'
+      +'<button class="btn bp" data-ekey="'+v._key+'" onclick="openEditModal(this.dataset.ekey)" style="font-size:11px;padding:6px">✏️ Editar</button>'
+      +'<button class="btn bd" data-dkey="'+v._key+'" onclick="deletarViagem(this.dataset.dkey)" style="font-size:11px;padding:6px">🗑️ Deletar</button>'
       +'</div>'
       +'</div>';
   }).join('');
