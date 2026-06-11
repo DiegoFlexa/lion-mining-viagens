@@ -123,6 +123,11 @@ input:focus{outline:none;border-color:#667eea;box-shadow:0 0 0 3px rgba(102,126,
       <button class="fb"    onclick="setFil('hoje',this)">Hoje</button>
       <button class="fb"    onclick="setFil('semana',this)">7 dias</button>
       <button class="fb"    onclick="setFil('mes',this)">30 dias</button>
+      <button class="fb"    onclick="setFil('dia',this)">📅 Dia</button>
+    </div>
+    <div id="hist-date-box" style="display:none;margin-bottom:12px">
+      <input type="date" id="hist-data" oninput="renderHist()">
+      <button class="btn bs" onclick="document.getElementById('hist-data').value='';renderHist()" style="margin-top:6px;padding:8px;font-size:12px">🔄 Limpar data</button>
     </div>
     <div id="histlist"></div>
   </div>
@@ -413,14 +418,21 @@ function setFil(f,btn){
   filtro=f;
   document.querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));
   btn.classList.add('on');
+  const dateBox=document.getElementById('hist-date-box');
+  dateBox.style.display=f==='dia'?'block':'none';
+  if(f!=='dia') document.getElementById('hist-data').value='';
   renderHist();
 }
 
 function filtrar(l){
-  if(filtro==='todos')return l;
-  if(filtro==='hoje')return l.filter(v=>new Date(v.ts).toDateString()===new Date().toDateString());
-  const lim=filtro==='semana'?7:30;
-  return l.filter(v=>(Date.now()-new Date(v.ts))<=lim*86400000);
+  if(filtro==='hoje') return l.filter(v=>new Date(v.ts).toDateString()===new Date().toDateString());
+  if(filtro==='semana') return l.filter(v=>(Date.now()-new Date(v.ts))<=7*86400000);
+  if(filtro==='mes') return l.filter(v=>(Date.now()-new Date(v.ts))<=30*86400000);
+  if(filtro==='dia'){
+    const d=document.getElementById('hist-data').value;
+    return d?l.filter(v=>v.data_saida===d):l;
+  }
+  return l;
 }
 
 function renderHist(){
