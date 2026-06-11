@@ -158,6 +158,28 @@ input:focus,select:focus{outline:none;border-color:#667eea;box-shadow:0 0 0 3px 
   </div>
 </div>
 
+<div class="modal" id="medit">
+  <div class="mbox">
+    <span class="mcl" onclick="closeEditModal()">✕</span>
+    <h2 style="margin-bottom:14px;color:#333">✏️ Editar Viagem</h2>
+    <div class="fg"><label>🔶 Placa *</label><input id="ed-placa" maxlength="10" style="text-transform:uppercase"></div>
+    <div class="row2">
+      <div class="fg"><label>📅 Data Chegada *</label><input type="date" id="ed-dch"></div>
+      <div class="fg"><label>🕐 Hora Chegada *</label><input type="time" id="ed-hch"></div>
+    </div>
+    <div class="row2">
+      <div class="fg"><label>📅 Data Saída *</label><input type="date" id="ed-dsa"></div>
+      <div class="fg"><label>🕐 Hora Saída *</label><input type="time" id="ed-hsa"></div>
+    </div>
+    <div class="fg"><label>⚖️ Peso (kg)</label><input type="number" id="ed-peso" step="100" min="0"></div>
+    <div class="fg"><label>📝 Nota Entrada</label><input id="ed-nent"></div>
+    <div class="fg"><label>📝 Nota Saída</label><input id="ed-nsai"></div>
+    <div class="ib iblue">⏱️ Tempo calculado: <strong id="ed-tempo">--</strong> min</div>
+    <button class="btn bp" id="bed" onclick="salvarEdicao()">💾 Salvar Alterações</button>
+    <button class="btn bs" onclick="closeEditModal()" style="margin-top:6px">❌ Cancelar</button>
+  </div>
+</div>
+
 <script>
 const FB = 'https://lion-416b7-default-rtdb.firebaseio.com';
 
@@ -175,8 +197,13 @@ async function fbDelete(p){
   const r = await fetch(FB+'/'+p+'.json',{method:'DELETE'});
   if(!r.ok) throw new Error('HTTP '+r.status);
 }
+async function fbPut(p,d){
+  const r = await fetch(FB+'/'+p+'.json',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)});
+  if(!r.ok) throw new Error('HTTP '+r.status);
+  return r.json();
+}
 
-let entradas=[],viagens=[],filtro='todos',modalKey=null;
+let entradas=[],viagens=[],filtro='todos',modalKey=null,editKey=null;
 
 function sync(s,m){
   document.getElementById('sdot').className='dot '+s;
@@ -336,7 +363,10 @@ function renderHist(){
       +(v.nota_entrada?'<div class="note">📥 '+v.nota_entrada+'</div>':'')
       +(v.nota_saida?'<div class="note">📤 '+v.nota_saida+'</div>':'')
       +'<div class="note">Registrado: '+new Date(v.ts).toLocaleString('pt-BR')+'</div>'
-      +'<button class="btn bd" onclick="deletarViagem(\''+v._key+'\')" style="font-size:11px;padding:6px;margin-top:8px">🗑️ Deletar</button></div>';
+      +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px">'
+      +'<button class="btn bp" onclick="openEditModal(\''+v._key+'\')" style="font-size:11px;padding:6px">✏️ Editar</button>'
+      +'<button class="btn bd" onclick="deletarViagem(\''+v._key+'\')" style="font-size:11px;padding:6px">🗑️ Deletar</button>'
+      +'</div></div>';
   }).join('');
 }
 
@@ -351,7 +381,62 @@ function renderStats(){
   const filtData=document.getElementById('stats-data').value;
 
   let lista=viagens;
-  if(filtData) lista=viagens.filter(v=>v.data_chegada===filtData);
+  if(filtData) lista=viagens.filter(v=>v.data_saida===filtData);
+
+function openEditModal(key){
+  const v=viagens.find(v=>v._key===key);
+  if(!v)return;
+  editKey=key;
+  document.getElementById('ed-placa').value=v.placa;
+  document.getElementById('ed-dch').value=v.data_chegada;
+  document.getElementById('ed-hch').value=v.hora_chegada;
+  document.getElementById('ed-dsa').value=v.data_saida;
+  document.getElementById('ed-hsa').value=v.hora_saida;
+  document.getElementById('ed-peso').value=v.peso_kg||'';
+  document.getElementById('ed-nent').value=v.nota_entrada||'';
+  document.getElementById('ed-nsai').value=v.nota_saida||'';
+  const calc=()=>{
+    const dc=document.getElementById('ed-dch').value,hc=document.getElementById('ed-hch').value;
+    const ds=document.getElementById('ed-dsa').value,hs=document.getElementById('ed-hsa').value;
+    if(dc&&hc&&ds&&hs){const d=(new Date(ds+'T'+hs)-new Date(dc+'T'+hc))/60000;document.getElementById('ed-tempo').textContent=d>=0?Math.round(d):'❌ Inválido';}
+  };
+  calc();
+  ['ed-dch','ed-hch','ed-dsa','ed-hsa'].forEach(id=>document.getElementById(id).oninput=calc);
+  document.getElementById('medit').classList.add('open');
+}
+
+function closeEditModal(){document.getElementById('medit').classList.remove('open');editKey=null;}
+
+async function salvarEdicao(){
+  const placa=document.getElementById('ed-placa').value.trim().toUpperCase();
+  const dc=document.getElementById('ed-dch').value,hc=document.getElementById('ed-hch').value;
+  const ds=document.getElementById('ed-dsa').value,hs=document.getElementById('ed-hsa').value;
+  const peso=document.getElementById('ed-peso').value;
+  const nent=document.getElementById('ed-nent').value.trim();
+  const nsai=document.getElementById('ed-nsai').value.trim();
+  if(!placa||!dc||!hc||!ds||!hs){alert('Preencha todos os campos obrigatórios');return;}
+  const dtE=new Date(dc+'T'+hc),dtS=new Date(ds+'T'+hs);
+  if(dtS<=dtE){alert('Hora de saída deve ser após chegada');return;}
+  const existing=viagens.find(v=>v._key===editKey);
+  setBusy('bed',true);
+  try{
+    await fbPut('viagens/'+editKey,{
+      placa,data_chegada:dc,hora_chegada:hc,data_saida:ds,hora_saida:hs,
+      peso_kg:peso?parseInt(peso):null,nota_entrada:nent,nota_saida:nsai,
+      tempo_min:Math.round((dtS-dtE)/60000),
+      ts:existing?existing.ts:new Date().toISOString()
+    });
+    closeEditModal();await load();renderHist();renderStats();
+  }catch(e){alert('Erro ao salvar: '+e.message);}
+  setBusy('bed',false);
+}
+
+function setBusy(id,busy){
+  const btn=document.getElementById(id);
+  btn.disabled=busy;
+  const labels={'bentrada':'✅ Registrar Entrada','bsai':'✅ Confirmar Saída','bed':'💾 Salvar Alterações'};
+  btn.innerHTML=busy?'<span class="spin"></span>Salvando…':labels[id];
+}
 
   if(!lista.length){
     c.innerHTML='<div class="empty"><div class="ei">📊</div>'+(filtData?'Nenhuma viagem neste dia':'Nenhum dado ainda')+'</div>';
