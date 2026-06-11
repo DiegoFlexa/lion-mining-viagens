@@ -355,9 +355,9 @@ async function confirmarSaida(){
 }
 
 // ── MODAL EDITAR ──────────────────────────────────────────────────────
-function openEditModal(key){
-  const v=viagens.find(v=>v._key===key);
-  if(!v)return;
+function openEditModal(i){
+  const v=_listaHist[i];
+  if(!v){alert('Erro: viagem não encontrada');return;}
   editKey=key;
   document.getElementById('ed-placa').value=v.placa;
   document.getElementById('ed-dch').value=v.data_chegada;
@@ -407,6 +407,8 @@ async function salvarEdicao(){
 }
 
 // ── HISTÓRICO ─────────────────────────────────────────────────────────
+let _listaHist = []; // referência global à lista visível
+
 function setFil(f,btn){
   filtro=f;
   document.querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));
@@ -423,10 +425,10 @@ function filtrar(l){
 
 function renderHist(){
   const q=(document.getElementById('shis').value||'').toUpperCase();
-  const lista=filtrar(viagens.filter(v=>!q||v.placa.includes(q)));
+  _listaHist=filtrar(viagens.filter(v=>!q||v.placa.includes(q)));
   const c=document.getElementById('histlist');
-  if(!lista.length){c.innerHTML='<div class="empty"><div class="ei">📭</div>Nenhuma viagem no período</div>';return;}
-  c.innerHTML=lista.map(v=>{
+  if(!_listaHist.length){c.innerHTML='<div class="empty"><div class="ei">📭</div>Nenhuma viagem no período</div>';return;}
+  c.innerHTML=_listaHist.map((v,i)=>{
     const tons=v.peso_kg?(v.peso_kg/1000).toFixed(2)+' t':'N/A';
     return '<div class="card">'
       +'<div class="ch">'+v.placa+' <span class="badge bok">'+v.tempo_min+' min</span></div>'
@@ -440,16 +442,18 @@ function renderHist(){
       +(v.nota_saida?'<div class="note">📤 '+v.nota_saida+'</div>':'')
       +'<div class="note">Registrado: '+new Date(v.ts).toLocaleString('pt-BR')+'</div>'
       +'<div class="btn-row">'
-      +'<button class="btn bp" data-ekey="'+v._key+'" onclick="openEditModal(this.dataset.ekey)" style="font-size:11px;padding:6px">✏️ Editar</button>'
-      +'<button class="btn bd" data-dkey="'+v._key+'" onclick="deletarViagem(this.dataset.dkey)" style="font-size:11px;padding:6px">🗑️ Deletar</button>'
+      +'<button class="btn bp" onclick="openEditModal('+i+')" style="font-size:11px;padding:6px">✏️ Editar</button>'
+      +'<button class="btn bd" onclick="deletarViagem('+i+')" style="font-size:11px;padding:6px">🗑️ Deletar</button>'
       +'</div>'
       +'</div>';
   }).join('');
 }
 
-async function deletarViagem(key){
+async function deletarViagem(i){
+  const v=_listaHist[i];
+  if(!v)return;
   if(!confirm('Deletar esta viagem?'))return;
-  try{await fbDelete('viagens/'+key);await load();renderHist();renderStats();}
+  try{await fbDelete('viagens/'+v._key);await load();renderHist();renderStats();}
   catch(e){alert('Erro: '+e.message);}
 }
 
