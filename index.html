@@ -123,7 +123,14 @@ input:focus,select:focus{outline:none;border-color:#667eea;box-shadow:0 0 0 3px 
     <div id="histlist"></div>
   </div>
 
-  <div id="sta" class="pane"><div id="statsbox"></div></div>
+  <div id="sta" class="pane">
+    <div class="fg" style="margin-bottom:14px">
+      <label>📅 Filtrar por dia</label>
+      <input type="date" id="stats-data" oninput="renderStats()">
+      <button class="btn bs" onclick="document.getElementById('stats-data').value='';renderStats()" style="margin-top:6px">🔄 Ver todos os dias</button>
+    </div>
+    <div id="statsbox"></div>
+  </div>
 
   <div id="exp" class="pane">
     <div class="ib iblue"><strong>📊 Exportar Dados</strong><br><span style="color:#444">Exporte para Excel ou CSV.</span></div>
@@ -341,19 +348,54 @@ async function deletarViagem(key){
 
 function renderStats(){
   const c=document.getElementById('statsbox');
-  if(!viagens.length){c.innerHTML='<div class="empty"><div class="ei">📊</div>Nenhum dado ainda</div>';return;}
-  const tot=viagens.length,plcs=new Set(viagens.map(v=>v.placa)).size;
-  const peso=viagens.reduce((s,v)=>s+(v.peso_kg||0),0);
-  const tmed=Math.round(viagens.reduce((s,v)=>s+v.tempo_min,0)/tot);
-  const cnt={};viagens.forEach(v=>cnt[v.placa]=(cnt[v.placa]||0)+1);
+  const filtData=document.getElementById('stats-data').value;
+
+  let lista=viagens;
+  if(filtData) lista=viagens.filter(v=>v.data_chegada===filtData);
+
+  if(!lista.length){
+    c.innerHTML='<div class="empty"><div class="ei">📊</div>'+(filtData?'Nenhuma viagem neste dia':'Nenhum dado ainda')+'</div>';
+    return;
+  }
+
+  const tot=lista.length,plcs=new Set(lista.map(v=>v.placa)).size;
+  const peso=lista.reduce((s,v)=>s+(v.peso_kg||0),0);
+  const tmed=Math.round(lista.reduce((s,v)=>s+v.tempo_min,0)/tot);
+  const cnt={};lista.forEach(v=>cnt[v.placa]=(cnt[v.placa]||0)+1);
   const [tp,tq]=Object.entries(cnt).sort((a,b)=>b[1]-a[1])[0];
-  c.innerHTML='<div class="sg">'
+
+  const mais_rapida=lista.reduce((a,b)=>a.tempo_min<b.tempo_min?a:b);
+  const mais_longa =lista.reduce((a,b)=>a.tempo_min>b.tempo_min?a:b);
+
+  const periodoLabel=filtData
+    ? '📅 Mostrando dados de: <strong>'+new Date(filtData+'T12:00:00').toLocaleDateString('pt-BR')+'</strong>'
+    : '📅 Mostrando <strong>todos os dias</strong>';
+
+  c.innerHTML=
+    '<div class="ib iblue" style="margin-bottom:14px">'+periodoLabel+'</div>'
+    +'<div class="sg">'
     +'<div class="sc"><div class="sl">VIAGENS</div><div class="sv">'+tot+'</div></div>'
     +'<div class="sc"><div class="sl">PLACAS</div><div class="sv">'+plcs+'</div></div>'
     +'<div class="sc"><div class="sl">PESO TOTAL</div><div class="sv">'+(peso/1000).toFixed(1)+'</div><div class="sl">toneladas</div></div>'
     +'<div class="sc"><div class="sl">TEMPO MÉDIO</div><div class="sv">'+tmed+'</div><div class="sl">minutos</div></div>'
     +'</div>'
-    +'<div class="ib iblue">🏆 <strong>Maior frequência:</strong> '+tp+' — '+tq+' viagem'+(tq>1?'s':'')+'</div>';
+    +'<div class="ib iblue">🏆 <strong>Maior frequência:</strong> '+tp+' — '+tq+' viagem'+(tq>1?'s':'')+'</div>'
+    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px">'
+    +'<div style="background:#e8f5e9;border-left:4px solid #4caf50;padding:12px;border-radius:8px">'
+    +'<div style="font-size:11px;color:#2e7d32;font-weight:600">⚡ VIAGEM MAIS RÁPIDA</div>'
+    +'<div style="font-size:22px;font-weight:700;color:#2e7d32;margin:4px 0">'+mais_rapida.tempo_min+' min</div>'
+    +'<div style="font-size:11px;color:#555">🔶 '+mais_rapida.placa+'</div>'
+    +'<div style="font-size:11px;color:#555">📅 '+mais_rapida.data_chegada+'</div>'
+    +'<div style="font-size:11px;color:#555">🕐 '+mais_rapida.hora_chegada+' → '+mais_rapida.hora_saida+'</div>'
+    +'</div>'
+    +'<div style="background:#fff3e0;border-left:4px solid #ff9800;padding:12px;border-radius:8px">'
+    +'<div style="font-size:11px;color:#e65100;font-weight:600">🐢 VIAGEM MAIS LONGA</div>'
+    +'<div style="font-size:22px;font-weight:700;color:#e65100;margin:4px 0">'+mais_longa.tempo_min+' min</div>'
+    +'<div style="font-size:11px;color:#555">🔶 '+mais_longa.placa+'</div>'
+    +'<div style="font-size:11px;color:#555">📅 '+mais_longa.data_chegada+'</div>'
+    +'<div style="font-size:11px;color:#555">🕐 '+mais_longa.hora_chegada+' → '+mais_longa.hora_saida+'</div>'
+    +'</div>'
+    +'</div>';
 }
 
 function buildRows(){
