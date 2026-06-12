@@ -14,46 +14,36 @@ body{font-family:'Segoe UI',sans-serif;background:linear-gradient(135deg,#667eea
 .header p{font-size:12px;opacity:.85}
 .syncbar{background:#1a1a2e;color:#fff;font-size:11px;padding:7px 14px;display:flex;align-items:center;gap:8px;min-height:30px}
 .dot{width:9px;height:9px;border-radius:50%;flex-shrink:0;transition:.3s}
-.dot.ok{background:#4caf50}
-.dot.busy{background:#ffc107;animation:blink .7s infinite}
-.dot.err{background:#f44336}
+.dot.ok{background:#4caf50}.dot.busy{background:#ffc107;animation:blink .7s infinite}.dot.err{background:#f44336}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
 .tabs{display:flex;background:#f8f9fa;border-bottom:2px solid #eee}
 .tb{flex:1;padding:11px 2px;background:none;border:none;cursor:pointer;font-weight:600;font-size:11px;color:#666;border-bottom:3px solid transparent;margin-bottom:-2px;transition:.2s}
 .tb.on{color:#667eea;border-bottom-color:#667eea;background:#fff}
-.pane{display:none;padding:18px;animation:fi .2s}
-.pane.on{display:block}
-@keyframes fi{from{opacity:0}to{opacity:1}}
+.pane{display:none;padding:18px}.pane.on{display:block}
 .fg{margin-bottom:13px}
 label{display:block;margin-bottom:5px;font-weight:600;color:#333;font-size:13px}
-input,select{width:100%;padding:11px;border:2px solid #ddd;border-radius:8px;font-size:14px;font-family:inherit;transition:.2s}
+input{width:100%;padding:11px;border:2px solid #ddd;border-radius:8px;font-size:14px;font-family:inherit;transition:.2s}
 input:focus{outline:none;border-color:#667eea;box-shadow:0 0 0 3px rgba(102,126,234,.1)}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .btn{width:100%;padding:12px;border:none;border-radius:8px;font-weight:600;cursor:pointer;font-size:14px;transition:.2s;margin-top:7px}
 .bp{background:linear-gradient(135deg,#667eea,#764ba2);color:#fff}
-.bp:hover:not(:disabled){transform:translateY(-1px);box-shadow:0 6px 18px rgba(102,126,234,.35)}
-.bp:disabled{opacity:.5;cursor:not-allowed}
-.bs{background:#eee;color:#333}
-.bd{background:#ff4757;color:#fff}
+.bp:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(102,126,234,.35)}
+.bp:disabled{opacity:.5;cursor:not-allowed;transform:none}
+.bs{background:#eee;color:#333}.bd{background:#ff4757;color:#fff}
 .alert{padding:11px;border-radius:8px;margin-bottom:12px;font-size:13px;font-weight:500}
-.as{background:#d4edda;color:#155724}
-.ae{background:#f8d7da;color:#721c24}
+.as{background:#d4edda;color:#155724}.ae{background:#f8d7da;color:#721c24}
 .card{background:#f8f9fa;border-left:4px solid #667eea;padding:12px;margin-bottom:10px;border-radius:6px;font-size:12px}
 .card.pend{background:#fff9e6;border-left-color:#ffc107}
 .ch{font-weight:700;color:#333;font-size:13px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center}
 .cg{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px}
 .ci{background:#fff;padding:6px;border-radius:4px}
-.cl{color:#888;font-size:11px}
-.cv{color:#333;font-weight:600;margin-top:2px}
+.cl{color:#888;font-size:11px}.cv{color:#333;font-weight:600;margin-top:2px}
 .badge{padding:3px 8px;border-radius:12px;font-size:11px;font-weight:600}
-.bok{background:#d4edda;color:#155724}
-.bwarn{background:#fff3cd;color:#856404}
+.bok{background:#d4edda;color:#155724}.bwarn{background:#fff3cd;color:#856404}
 .sg{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px}
 .sc{background:linear-gradient(135deg,#667eea,#764ba2);color:#fff;padding:14px;border-radius:8px;text-align:center}
-.sl{font-size:11px;opacity:.85;margin-bottom:4px}
-.sv{font-size:26px;font-weight:700}
-.empty{text-align:center;padding:36px 20px;color:#aaa}
-.ei{font-size:44px;margin-bottom:8px}
+.sl{font-size:11px;opacity:.85;margin-bottom:4px}.sv{font-size:26px;font-weight:700}
+.empty{text-align:center;padding:36px 20px;color:#aaa}.ei{font-size:44px;margin-bottom:8px}
 .srch{margin-bottom:12px}
 .frow{display:flex;gap:8px;margin-bottom:12px;overflow-x:auto;padding-bottom:4px}
 .fb{padding:5px 12px;border:2px solid #ddd;background:#fff;border-radius:20px;cursor:pointer;font-size:12px;white-space:nowrap}
@@ -63,25 +53,17 @@ input:focus{outline:none;border-color:#667eea;box-shadow:0 0 0 3px rgba(102,126,
 .mbox{background:#fff;border-radius:14px;padding:20px;width:100%;max-width:400px;max-height:85vh;overflow-y:auto}
 .mcl{float:right;font-size:22px;cursor:pointer;color:#aaa;line-height:1}
 .ib{padding:11px;border-radius:8px;margin-bottom:12px;font-size:12px}
-.iblue{background:#e7f3ff;color:#0066cc}
-.iyellow{background:#fff3cd;color:#856404}
+.iblue{background:#e7f3ff;color:#0066cc}.iyellow{background:#fff3cd;color:#856404}
 .note{font-size:11px;color:#999;margin-top:4px}
 .spin{display:inline-block;width:13px;height:13px;border:2px solid #ddd;border-top-color:#667eea;border-radius:50%;animation:sp .7s linear infinite;margin-right:5px;vertical-align:middle}
 @keyframes sp{to{transform:rotate(360deg)}}
-.exprow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .btn-row{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <div class="header">
-    <h1>🚚 LION MINING</h1>
-    <p>Registro de Viagens — Base Compartilhada</p>
-  </div>
-  <div class="syncbar">
-    <div class="dot busy" id="sdot"></div>
-    <span id="smsg">Conectando ao Firebase…</span>
-  </div>
+  <div class="header"><h1>🚚 LION MINING</h1><p>Registro de Viagens — Base Compartilhada</p></div>
+  <div class="syncbar"><div class="dot busy" id="sdot"></div><span id="smsg">Conectando…</span></div>
   <div class="tabs">
     <button class="tb on" onclick="goTab('ent',this)">📥 Entrada</button>
     <button class="tb"    onclick="goTab('sai',this)">📤 Saída</button>
@@ -90,24 +72,20 @@ input:focus{outline:none;border-color:#667eea;box-shadow:0 0 0 3px rgba(102,126,
     <button class="tb"    onclick="goTab('exp',this)">💾 Export</button>
   </div>
 
-  <!-- ENTRADA -->
   <div id="ent" class="pane on">
     <div id="aent"></div>
     <div class="ib iblue">✅ Registre a chegada do caminhão ao pátio</div>
-    <div class="fg"><label>🔶 Placa do Cavalo *</label>
-      <input id="eplaca" placeholder="Ex: QXJ9H00" maxlength="10" style="text-transform:uppercase"></div>
+    <div class="fg"><label>🔶 Placa *</label><input id="eplaca" placeholder="Ex: QXJ9H00" maxlength="10" style="text-transform:uppercase"></div>
     <div class="row2">
-      <div class="fg"><label>📅 Data Chegada *</label><input type="date" id="edata"></div>
-      <div class="fg"><label>🕐 Hora Chegada *</label><input type="time" id="ehora"></div>
+      <div class="fg"><label>📅 Data *</label><input type="date" id="edata"></div>
+      <div class="fg"><label>🕐 Hora *</label><input type="time" id="ehora"></div>
     </div>
-    <div class="fg"><label>📝 Nota (opcional)</label>
-      <input id="enota" placeholder="Ex: avaria, amassado…"></div>
+    <div class="fg"><label>📝 Nota</label><input id="enota" placeholder="Opcional…"></div>
     <button class="btn bp" id="bentrada" onclick="registrarEntrada()">✅ Registrar Entrada</button>
     <button class="btn bs" onclick="limparEntrada()">🔄 Limpar</button>
-    <p style="font-size:11px;color:#999;text-align:center;margin-top:10px">🌐 Dados salvos no Firebase — compartilhados em tempo real</p>
+    <p style="font-size:11px;color:#999;text-align:center;margin-top:10px">🌐 Firebase — dados compartilhados em tempo real</p>
   </div>
 
-  <!-- SAÍDA -->
   <div id="sai" class="pane">
     <div id="asai"></div>
     <div class="ib iyellow">⚠️ Selecione o caminhão e registre a saída</div>
@@ -115,7 +93,6 @@ input:focus{outline:none;border-color:#667eea;box-shadow:0 0 0 3px rgba(102,126,
     <div id="pendlist"></div>
   </div>
 
-  <!-- HISTÓRICO -->
   <div id="his" class="pane">
     <div class="srch"><input id="shis" placeholder="🔍 Buscar placa…" oninput="renderHist()"></div>
     <div class="frow">
@@ -127,30 +104,26 @@ input:focus{outline:none;border-color:#667eea;box-shadow:0 0 0 3px rgba(102,126,
     </div>
     <div id="hist-date-box" style="display:none;margin-bottom:12px">
       <input type="date" id="hist-data" oninput="renderHist()">
-      <button class="btn bs" onclick="document.getElementById('hist-data').value='';renderHist()" style="margin-top:6px;padding:8px;font-size:12px">🔄 Limpar data</button>
     </div>
     <div id="histlist"></div>
   </div>
 
-  <!-- STATS -->
   <div id="sta" class="pane">
     <div class="fg" style="margin-bottom:14px">
       <label>📅 Filtrar por dia</label>
       <input type="date" id="stats-data" oninput="renderStats()">
-      <button class="btn bs" onclick="document.getElementById('stats-data').value='';renderStats()" style="margin-top:6px">🔄 Ver todos os dias</button>
+      <button class="btn bs" onclick="document.getElementById('stats-data').value='';renderStats()" style="margin-top:6px;padding:8px;font-size:12px">🔄 Todos os dias</button>
     </div>
     <div id="statsbox"></div>
   </div>
 
-  <!-- EXPORT -->
   <div id="exp" class="pane">
-    <div class="ib iblue"><strong>📊 Exportar Dados</strong><br><span style="color:#444">Exporte para Excel ou CSV.</span></div>
-    <div class="exprow">
+    <div class="ib iblue"><strong>📊 Exportar</strong></div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
       <button class="btn bp" onclick="expCSV()">📥 CSV</button>
       <button class="btn bp" onclick="expXLSX()">📥 Excel</button>
     </div>
     <button class="btn bd" onclick="clearAll()" style="margin-top:16px">🗑️ Limpar Todos os Dados</button>
-    <p style="font-size:11px;color:#999;text-align:center;margin-top:8px">⚠️ Apaga o banco para TODOS os usuários</p>
   </div>
 </div>
 
@@ -162,8 +135,8 @@ input:focus{outline:none;border-color:#667eea;box-shadow:0 0 0 3px rgba(102,126,
     <div id="minfo" class="ib iblue"></div>
     <div class="fg"><label>📅 Data Saída *</label><input type="date" id="mdata"></div>
     <div class="fg"><label>🕐 Hora Saída *</label><input type="time" id="mhora"></div>
-    <div class="fg"><label>⚖️ Peso (kg)</label><input type="number" id="mpeso" placeholder="Ex: 45000" step="100" min="0"></div>
-    <div class="fg"><label>📝 Nota adicional</label><input id="mnota" placeholder="Ex: descarregamento ok"></div>
+    <div class="fg"><label>⚖️ Peso (kg)</label><input type="number" id="mpeso" step="100" min="0"></div>
+    <div class="fg"><label>📝 Nota</label><input id="mnota"></div>
     <div class="ib iblue">⏱️ Tempo: <strong id="mtempo">--</strong> min</div>
     <button class="btn bp" id="bsai" onclick="confirmarSaida()">✅ Confirmar Saída</button>
     <button class="btn bs" onclick="closeModal()" style="margin-top:6px">❌ Cancelar</button>
@@ -175,8 +148,7 @@ input:focus{outline:none;border-color:#667eea;box-shadow:0 0 0 3px rgba(102,126,
   <div class="mbox">
     <span class="mcl" onclick="closeEditModal()">✕</span>
     <h2 style="margin-bottom:14px;color:#333">✏️ Editar Viagem</h2>
-    <div class="fg"><label>🔶 Placa *</label>
-      <input id="ed-placa" maxlength="10" style="text-transform:uppercase"></div>
+    <div class="fg"><label>🔶 Placa *</label><input id="ed-placa" maxlength="10" style="text-transform:uppercase"></div>
     <div class="row2">
       <div class="fg"><label>📅 Data Chegada *</label><input type="date" id="ed-dch"></div>
       <div class="fg"><label>🕐 Hora Chegada *</label><input type="time" id="ed-hch"></div>
@@ -185,271 +157,244 @@ input:focus{outline:none;border-color:#667eea;box-shadow:0 0 0 3px rgba(102,126,
       <div class="fg"><label>📅 Data Saída *</label><input type="date" id="ed-dsa"></div>
       <div class="fg"><label>🕐 Hora Saída *</label><input type="time" id="ed-hsa"></div>
     </div>
-    <div class="fg"><label>⚖️ Peso (kg)</label>
-      <input type="number" id="ed-peso" step="100" min="0"></div>
+    <div class="fg"><label>⚖️ Peso (kg)</label><input type="number" id="ed-peso" step="100" min="0"></div>
     <div class="fg"><label>📝 Nota Entrada</label><input id="ed-nent"></div>
     <div class="fg"><label>📝 Nota Saída</label><input id="ed-nsai"></div>
-    <div class="ib iblue">⏱️ Tempo calculado: <strong id="ed-tempo">--</strong> min</div>
-    <button class="btn bp" id="bed" onclick="salvarEdicao()">💾 Salvar Alterações</button>
+    <div class="ib iblue">⏱️ Tempo: <strong id="ed-tempo">--</strong> min</div>
+    <button class="btn bp" id="bed" onclick="confirmarEdicao()">💾 Salvar</button>
     <button class="btn bs" onclick="closeEditModal()" style="margin-top:6px">❌ Cancelar</button>
   </div>
 </div>
 
 <script>
+var FB = 'https://lion-416b7-default-rtdb.firebaseio.com';
+var entradas = [];
+var viagens  = [];
+var filtro   = 'todos';
+var modalIdx = -1;
+var editIdx  = -1;
+var _listaPend = [];
+var _listaHist = [];
+
 // ── FIREBASE ──────────────────────────────────────────────────────────
-const FB = 'https://lion-416b7-default-rtdb.firebaseio.com';
-
-async function fbGet(p){
-  const r=await fetch(FB+'/'+p+'.json');
-  if(!r.ok) throw new Error('HTTP '+r.status);
-  return r.json();
+function fbGet(p, cb) {
+  fetch(FB+'/'+p+'.json')
+    .then(function(r){ return r.json(); })
+    .then(function(d){ cb(null, d); })
+    .catch(function(e){ cb(e, null); });
 }
-async function fbPost(p,d){
-  const r=await fetch(FB+'/'+p+'.json',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)});
-  if(!r.ok) throw new Error('HTTP '+r.status);
-  return r.json();
+function fbPost(p, d, cb) {
+  fetch(FB+'/'+p+'.json', {method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(d)})
+    .then(function(r){ return r.json(); })
+    .then(function(d){ cb(null, d); })
+    .catch(function(e){ cb(e, null); });
 }
-async function fbPut(p,d){
-  const r=await fetch(FB+'/'+p+'.json',{method:'PUT',headers:{'Content-Type':'application/json'},body:JSON.stringify(d)});
-  if(!r.ok) throw new Error('HTTP '+r.status);
-  return r.json();
+function fbPut(p, d, cb) {
+  fetch(FB+'/'+p+'.json', {method:'PUT', headers:{'Content-Type':'application/json'}, body:JSON.stringify(d)})
+    .then(function(r){ return r.json(); })
+    .then(function(d){ cb(null, d); })
+    .catch(function(e){ cb(e, null); });
 }
-async function fbDelete(p){
-  const r=await fetch(FB+'/'+p+'.json',{method:'DELETE'});
-  if(!r.ok) throw new Error('HTTP '+r.status);
+function fbDelete(p, cb) {
+  fetch(FB+'/'+p+'.json', {method:'DELETE'})
+    .then(function(){ cb(null); })
+    .catch(function(e){ cb(e); });
 }
-
-// ── ESTADO ────────────────────────────────────────────────────────────
-let entradas=[],viagens=[],filtro='todos',modalKey=null,editKey=null;
 
 // ── SYNC ──────────────────────────────────────────────────────────────
-function sync(s,m){
-  document.getElementById('sdot').className='dot '+s;
-  document.getElementById('smsg').textContent=m;
+function sync(s, m) {
+  document.getElementById('sdot').className = 'dot '+s;
+  document.getElementById('smsg').textContent = m;
 }
 
-async function load(){
+function load(depois) {
   sync('busy','Carregando…');
-  try{
-    const [re,rv]=await Promise.all([fbGet('entradas'),fbGet('viagens')]);
-    entradas=re?Object.entries(re).map(([k,v])=>({...v,_key:k})).sort((a,b)=>new Date(b.ts)-new Date(a.ts)):[];
-    viagens =rv?Object.entries(rv).map(([k,v])=>({...v,_key:k})).sort((a,b)=>new Date(b.ts)-new Date(a.ts)):[];
+  var got = {e:false, v:false, re:null, rv:null};
+  function check() {
+    if (!got.e || !got.v) return;
+    entradas = got.re ? Object.keys(got.re).map(function(k){ var o=got.re[k]; o._key=k; return o; })
+                          .sort(function(a,b){ return new Date(b.ts)-new Date(a.ts); }) : [];
+    viagens  = got.rv ? Object.keys(got.rv).map(function(k){ var o=got.rv[k]; o._key=k; return o; })
+                          .sort(function(a,b){ return new Date(b.ts)-new Date(a.ts); }) : [];
     sync('ok','Firebase ✓  '+viagens.length+' viagem(ns) · '+entradas.length+' em andamento');
-  }catch(e){sync('err','Erro: '+e.message);}
+    if (depois) depois();
+  }
+  fbGet('entradas', function(err, d){ got.e=true; got.re=err?null:d; check(); });
+  fbGet('viagens',  function(err, d){ got.v=true; got.rv=err?null:d; check(); });
 }
 
-setInterval(async()=>{
-  await load();
-  const id=document.querySelector('.pane.on')?.id;
-  if(id==='sai')renderPend();
-  if(id==='his')renderHist();
-  if(id==='sta')renderStats();
-},15000);
+setInterval(function(){
+  load(function(){
+    var id = document.querySelector('.pane.on') ? document.querySelector('.pane.on').id : '';
+    if(id==='sai') renderPend();
+    if(id==='his') renderHist();
+    if(id==='sta') renderStats();
+  });
+}, 15000);
 
-(async()=>{
-  document.getElementById('edata').value=hoje();
-  await load();
-})();
+// ── INIT ──────────────────────────────────────────────────────────────
+document.getElementById('edata').value = hoje();
+load(function(){ renderPend(); });
 
 // ── TABS ──────────────────────────────────────────────────────────────
-async function goTab(id,btn){
-  document.querySelectorAll('.pane').forEach(p=>p.classList.remove('on'));
-  document.querySelectorAll('.tb').forEach(b=>b.classList.remove('on'));
+window.goTab = function(id, btn) {
+  var ps = document.querySelectorAll('.pane');
+  for(var i=0;i<ps.length;i++) ps[i].classList.remove('on');
+  var bs = document.querySelectorAll('.tb');
+  for(var i=0;i<bs.length;i++) bs[i].classList.remove('on');
   document.getElementById(id).classList.add('on');
   btn.classList.add('on');
-  await load();
-  if(id==='sai')renderPend();
-  if(id==='his')renderHist();
-  if(id==='sta')renderStats();
-}
+  load(function(){
+    if(id==='sai') renderPend();
+    if(id==='his') renderHist();
+    if(id==='sta') renderStats();
+  });
+};
 
-// ── ALERTAS ───────────────────────────────────────────────────────────
-function alerta(c,m,t='as'){
-  const el=document.getElementById(c);
-  el.innerHTML='<div class="alert '+t+'">'+m+'</div>';
-  setTimeout(()=>el.innerHTML='',4000);
+// ── ALERT ─────────────────────────────────────────────────────────────
+function alerta(cid, msg, tipo) {
+  tipo = tipo || 'as';
+  var el = document.getElementById(cid);
+  el.innerHTML = '<div class="alert '+tipo+'">'+msg+'</div>';
+  setTimeout(function(){ el.innerHTML=''; }, 4000);
 }
 
 // ── ENTRADA ───────────────────────────────────────────────────────────
-async function registrarEntrada(){
-  const placa=document.getElementById('eplaca').value.trim().toUpperCase();
-  const data=document.getElementById('edata').value;
-  const hora=document.getElementById('ehora').value;
-  const nota=document.getElementById('enota').value.trim();
-  if(!placa){alerta('aent','❌ Informe a placa','ae');return;}
-  if(!data){alerta('aent','❌ Informe a data','ae');return;}
-  if(!hora){alerta('aent','❌ Informe a hora','ae');return;}
-  setBusy('bentrada',true);
-  try{
-    await fbPost('entradas',{placa,data,hora,nota,ts:new Date().toISOString()});
+window.registrarEntrada = function() {
+  var placa = document.getElementById('eplaca').value.trim().toUpperCase();
+  var data  = document.getElementById('edata').value;
+  var hora  = document.getElementById('ehora').value;
+  var nota  = document.getElementById('enota').value.trim();
+  if(!placa){ alerta('aent','❌ Informe a placa','ae'); return; }
+  if(!data) { alerta('aent','❌ Informe a data','ae');  return; }
+  if(!hora) { alerta('aent','❌ Informe a hora','ae');  return; }
+  setBusy('bentrada', true);
+  fbPost('entradas', {placa:placa,data:data,hora:hora,nota:nota,ts:new Date().toISOString()}, function(err){
+    setBusy('bentrada', false);
+    if(err){ alerta('aent','❌ Erro: '+err.message,'ae'); return; }
     alerta('aent','✅ Entrada salva!');
     limparEntrada();
-    await load();
-  }catch(e){alerta('aent','❌ Erro: '+e.message,'ae');}
-  setBusy('bentrada',false);
-}
+    load(function(){ renderPend(); });
+  });
+};
 
-function limparEntrada(){
-  ['eplaca','ehora','enota'].forEach(id=>document.getElementById(id).value='');
+window.limparEntrada = function() {
+  document.getElementById('eplaca').value='';
+  document.getElementById('ehora').value='';
+  document.getElementById('enota').value='';
   document.getElementById('edata').value=hoje();
-}
+};
 
-// ── LISTA EM ANDAMENTO ────────────────────────────────────────────────
-let _listaPend = [];
-
-function renderPend(){
-  const q=(document.getElementById('ssai').value||'').toUpperCase();
-  _listaPend=entradas.filter(e=>!q||e.placa.includes(q));
-  const c=document.getElementById('pendlist');
-  if(!_listaPend.length){c.innerHTML='<div class="empty"><div class="ei">📭</div>Nenhum caminhão em andamento</div>';return;}
-  c.innerHTML=_listaPend.map(function(e,i){
-    var min=Math.round((Date.now()-new Date(e.ts))/60000);
-    return '<div class="card pend">'
+// ── SAÍDA LIST ────────────────────────────────────────────────────────
+function renderPend() {
+  var q = (document.getElementById('ssai').value||'').toUpperCase();
+  _listaPend = entradas.filter(function(e){ return !q || e.placa.indexOf(q)>=0; });
+  var c = document.getElementById('pendlist');
+  if(!_listaPend.length){ c.innerHTML='<div class="empty"><div class="ei">📭</div>Nenhum em andamento</div>'; return; }
+  var html = '';
+  for(var i=0; i<_listaPend.length; i++) {
+    var e = _listaPend[i];
+    var min = Math.round((Date.now()-new Date(e.ts))/60000);
+    html += '<div class="card pend">'
       +'<div class="ch">'+e.placa+' <span class="badge bwarn">'+min+' min</span></div>'
       +'<div class="cg">'
       +'<div class="ci"><div class="cl">Chegada</div><div class="cv">'+e.data+' '+e.hora+'</div></div>'
       +'<div class="ci"><div class="cl">Aguardando</div><div class="cv">'+min+' min</div></div>'
       +'</div>'
       +(e.nota?'<div class="note">📝 '+e.nota+'</div>':'')
-      +'<button class="btn bp" onclick="openModal('+i+')" style="font-size:12px;padding:8px;margin-top:8px">📤 Registrar Saída</button>'
+      +'<button class="btn bp" onclick="abrirSaida('+i+')" style="font-size:12px;padding:8px;margin-top:8px">📤 Registrar Saída</button>'
       +'<button class="btn bd" onclick="cancelarEntrada('+i+')" style="font-size:11px;padding:6px;margin-top:5px">🗑️ Cancelar</button>'
       +'</div>';
-  }).join('');
+  }
+  c.innerHTML = html;
 }
 
-async function cancelarEntrada(i){
-  var ent=_listaPend[i];
+window.abrirSaida = function(i) {
+  var ent = _listaPend[i];
   if(!ent) return;
-  if(!confirm('Cancelar esta entrada?'))return;
-  try{await fbDelete('entradas/'+ent._key);alerta('asai','✅ Entrada cancelada');await load();renderPend();}
-  catch(e){alerta('asai','❌ Erro: '+e.message,'ae');}
-}
-
-// ── MODAL SAÍDA ───────────────────────────────────────────────────────
-function openModal(i){
-  var ent=_listaPend[i];
-  if(!ent) return;
-  modalKey=key;
-  document.getElementById('minfo').innerHTML='<strong>Placa: '+ent.placa+'</strong><br>Chegada: '+ent.data+' '+ent.hora;
-  document.getElementById('mdata').value=ent.data;
-  ['mhora','mpeso','mnota'].forEach(i=>document.getElementById(i).value='');
-  document.getElementById('mtempo').textContent='--';
-  const calc=()=>{
-    const ds=document.getElementById('mdata').value,hs=document.getElementById('mhora').value;
-    if(ds&&hs){const d=(new Date(ds+'T'+hs)-new Date(ent.data+'T'+ent.hora))/60000;document.getElementById('mtempo').textContent=d>=0?Math.round(d):'❌ Inválido';}
-  };
-  document.getElementById('mdata').oninput=calc;
-  document.getElementById('mhora').oninput=calc;
+  modalIdx = i;
+  document.getElementById('minfo').innerHTML = '<strong>'+ent.placa+'</strong> — Chegada: '+ent.data+' '+ent.hora;
+  document.getElementById('mdata').value = ent.data;
+  document.getElementById('mhora').value = '';
+  document.getElementById('mpeso').value = '';
+  document.getElementById('mnota').value = '';
+  document.getElementById('mtempo').textContent = '--';
+  function calc(){
+    var ds=document.getElementById('mdata').value, hs=document.getElementById('mhora').value;
+    if(ds&&hs){ var d=(new Date(ds+'T'+hs)-new Date(ent.data+'T'+ent.hora))/60000; document.getElementById('mtempo').textContent=d>=0?Math.round(d):'Inválido'; }
+  }
+  document.getElementById('mdata').oninput = calc;
+  document.getElementById('mhora').oninput = calc;
   document.getElementById('msai').classList.add('open');
-}
+};
 
-function closeModal(){document.getElementById('msai').classList.remove('open');modalKey=null;}
+window.cancelarEntrada = function(i) {
+  var ent = _listaPend[i];
+  if(!ent) return;
+  if(!confirm('Cancelar esta entrada?')) return;
+  fbDelete('entradas/'+ent._key, function(err){
+    if(err){ alerta('asai','❌ Erro: '+err.message,'ae'); return; }
+    alerta('asai','✅ Entrada cancelada');
+    load(function(){ renderPend(); });
+  });
+};
 
-async function confirmarSaida(){
-  const ent=entradas.find(e=>e._key===modalKey);
-  if(!ent){closeModal();return;}
-  const ds=document.getElementById('mdata').value,hs=document.getElementById('mhora').value;
-  const peso=document.getElementById('mpeso').value,nota=document.getElementById('mnota').value.trim();
-  if(!ds||!hs){alerta('asai','❌ Informe data e hora de saída','ae');return;}
-  const dtE=new Date(ent.data+'T'+ent.hora),dtS=new Date(ds+'T'+hs);
-  if(dtS<=dtE){alerta('asai','❌ Hora de saída deve ser após chegada','ae');return;}
-  setBusy('bsai',true);
-  try{
-    await fbPost('viagens',{placa:ent.placa,data_chegada:ent.data,hora_chegada:ent.hora,
-      data_saida:ds,hora_saida:hs,peso_kg:peso?parseInt(peso):null,
-      nota_entrada:ent.nota||'',nota_saida:nota,
-      tempo_min:Math.round((dtS-dtE)/60000),ts:new Date().toISOString()});
-    await fbDelete('entradas/'+modalKey);
-    alerta('asai','✅ Saída registrada!');
-    closeModal();await load();renderPend();
-  }catch(e){alerta('asai','❌ Erro: '+e.message,'ae');}
-  setBusy('bsai',false);
-}
+window.closeModal = function() { document.getElementById('msai').classList.remove('open'); modalIdx=-1; };
 
-// ── MODAL EDITAR ──────────────────────────────────────────────────────
-function openEditModal(i){
-  const v=_listaHist[i];
-  if(!v){alert('Erro: viagem não encontrada');return;}
-  editKey=key;
-  document.getElementById('ed-placa').value=v.placa;
-  document.getElementById('ed-dch').value=v.data_chegada;
-  document.getElementById('ed-hch').value=v.hora_chegada;
-  document.getElementById('ed-dsa').value=v.data_saida;
-  document.getElementById('ed-hsa').value=v.hora_saida;
-  document.getElementById('ed-peso').value=v.peso_kg||'';
-  document.getElementById('ed-nent').value=v.nota_entrada||'';
-  document.getElementById('ed-nsai').value=v.nota_saida||'';
-  const calc=()=>{
-    const dc=document.getElementById('ed-dch').value,hc=document.getElementById('ed-hch').value;
-    const ds=document.getElementById('ed-dsa').value,hs=document.getElementById('ed-hsa').value;
-    if(dc&&hc&&ds&&hs){
-      const d=(new Date(ds+'T'+hs)-new Date(dc+'T'+hc))/60000;
-      document.getElementById('ed-tempo').textContent=d>=0?Math.round(d):'❌ Inválido';
-    }
-  };
-  calc();
-  ['ed-dch','ed-hch','ed-dsa','ed-hsa'].forEach(id=>document.getElementById(id).oninput=calc);
-  document.getElementById('medit').classList.add('open');
-}
-
-function closeEditModal(){document.getElementById('medit').classList.remove('open');editKey=null;}
-
-async function salvarEdicao(){
-  const placa=document.getElementById('ed-placa').value.trim().toUpperCase();
-  const dc=document.getElementById('ed-dch').value,hc=document.getElementById('ed-hch').value;
-  const ds=document.getElementById('ed-dsa').value,hs=document.getElementById('ed-hsa').value;
-  const peso=document.getElementById('ed-peso').value;
-  const nent=document.getElementById('ed-nent').value.trim();
-  const nsai=document.getElementById('ed-nsai').value.trim();
-  if(!placa||!dc||!hc||!ds||!hs){alert('Preencha todos os campos obrigatórios');return;}
-  const dtE=new Date(dc+'T'+hc),dtS=new Date(ds+'T'+hs);
-  if(dtS<=dtE){alert('Hora de saída deve ser após chegada');return;}
-  const existing=viagens.find(v=>v._key===editKey);
-  setBusy('bed',true);
-  try{
-    await fbPut('viagens/'+editKey,{
-      placa,data_chegada:dc,hora_chegada:hc,data_saida:ds,hora_saida:hs,
-      peso_kg:peso?parseInt(peso):null,nota_entrada:nent,nota_saida:nsai,
-      tempo_min:Math.round((dtS-dtE)/60000),
-      ts:existing?existing.ts:new Date().toISOString()
+window.confirmarSaida = function() {
+  var ent = _listaPend[modalIdx];
+  if(!ent){ closeModal(); return; }
+  var ds=document.getElementById('mdata').value, hs=document.getElementById('mhora').value;
+  var peso=document.getElementById('mpeso').value, nota=document.getElementById('mnota').value.trim();
+  if(!ds||!hs){ alerta('asai','❌ Informe data e hora','ae'); return; }
+  var dtE=new Date(ent.data+'T'+ent.hora), dtS=new Date(ds+'T'+hs);
+  if(dtS<=dtE){ alerta('asai','❌ Saída deve ser após chegada','ae'); return; }
+  setBusy('bsai', true);
+  var viagem = {placa:ent.placa,data_chegada:ent.data,hora_chegada:ent.hora,
+    data_saida:ds,hora_saida:hs,peso_kg:peso?parseInt(peso):null,
+    nota_entrada:ent.nota||'',nota_saida:nota,
+    tempo_min:Math.round((dtS-dtE)/60000),ts:new Date().toISOString()};
+  fbPost('viagens', viagem, function(err){
+    if(err){ setBusy('bsai',false); alerta('asai','❌ Erro: '+err.message,'ae'); return; }
+    fbDelete('entradas/'+ent._key, function(){
+      setBusy('bsai', false);
+      alerta('asai','✅ Saída registrada!');
+      closeModal();
+      load(function(){ renderPend(); });
     });
-    closeEditModal();await load();renderHist();renderStats();
-  }catch(e){alert('Erro ao salvar: '+e.message);}
-  setBusy('bed',false);
-}
+  });
+};
 
 // ── HISTÓRICO ─────────────────────────────────────────────────────────
-let _listaHist = []; // referência global à lista visível
-
-function setFil(f,btn){
-  filtro=f;
-  document.querySelectorAll('.fb').forEach(b=>b.classList.remove('on'));
+window.setFil = function(f, btn) {
+  filtro = f;
+  var bs = document.querySelectorAll('.fb');
+  for(var i=0;i<bs.length;i++) bs[i].classList.remove('on');
   btn.classList.add('on');
-  const dateBox=document.getElementById('hist-date-box');
-  dateBox.style.display=f==='dia'?'block':'none';
+  document.getElementById('hist-date-box').style.display = f==='dia'?'block':'none';
   if(f!=='dia') document.getElementById('hist-data').value='';
   renderHist();
-}
+};
 
-function filtrar(l){
-  if(filtro==='hoje') return l.filter(v=>new Date(v.ts).toDateString()===new Date().toDateString());
-  if(filtro==='semana') return l.filter(v=>(Date.now()-new Date(v.ts))<=7*86400000);
-  if(filtro==='mes') return l.filter(v=>(Date.now()-new Date(v.ts))<=30*86400000);
-  if(filtro==='dia'){
-    const d=document.getElementById('hist-data').value;
-    return d?l.filter(v=>v.data_saida===d):l;
-  }
+function filtrar(l) {
+  var agora = Date.now();
+  if(filtro==='hoje') return l.filter(function(v){ return new Date(v.ts).toDateString()===new Date().toDateString(); });
+  if(filtro==='semana') return l.filter(function(v){ return (agora-new Date(v.ts))<=7*86400000; });
+  if(filtro==='mes') return l.filter(function(v){ return (agora-new Date(v.ts))<=30*86400000; });
+  if(filtro==='dia'){ var d=document.getElementById('hist-data').value; return d?l.filter(function(v){ return v.data_saida===d; }):l; }
   return l;
 }
 
-function renderHist(){
-  const q=(document.getElementById('shis').value||'').toUpperCase();
-  _listaHist=filtrar(viagens.filter(v=>!q||v.placa.includes(q)));
-  const c=document.getElementById('histlist');
-  if(!_listaHist.length){c.innerHTML='<div class="empty"><div class="ei">📭</div>Nenhuma viagem no período</div>';return;}
-  c.innerHTML=_listaHist.map(function(v,i){
-    var tons=v.peso_kg?(v.peso_kg/1000).toFixed(2)+' t':'N/A';
-    return '<div class="card">'
+function renderHist() {
+  var q = (document.getElementById('shis').value||'').toUpperCase();
+  _listaHist = filtrar(viagens.filter(function(v){ return !q||v.placa.indexOf(q)>=0; }));
+  var c = document.getElementById('histlist');
+  if(!_listaHist.length){ c.innerHTML='<div class="empty"><div class="ei">📭</div>Nenhuma viagem</div>'; return; }
+  var html = '';
+  for(var i=0; i<_listaHist.length; i++) {
+    var v = _listaHist[i];
+    var tons = v.peso_kg?(v.peso_kg/1000).toFixed(2)+' t':'N/A';
+    html += '<div class="card">'
       +'<div class="ch">'+v.placa+' <span class="badge bok">'+v.tempo_min+' min</span></div>'
       +'<div class="cg">'
       +'<div class="ci"><div class="cl">Chegada</div><div class="cv">'+v.data_chegada+' '+v.hora_chegada+'</div></div>'
@@ -459,113 +404,159 @@ function renderHist(){
       +'</div>'
       +(v.nota_entrada?'<div class="note">📥 '+v.nota_entrada+'</div>':'')
       +(v.nota_saida?'<div class="note">📤 '+v.nota_saida+'</div>':'')
-      +'<div class="note">Registrado: '+new Date(v.ts).toLocaleString('pt-BR')+'</div>'
+      +'<div class="note">'+new Date(v.ts).toLocaleString('pt-BR')+'</div>'
       +'<div class="btn-row">'
-      +'<button class="btn bp" onclick="openEditModal('+i+')" style="font-size:11px;padding:6px">✏️ Editar</button>'
+      +'<button class="btn bp" onclick="abrirEdicao('+i+')" style="font-size:11px;padding:6px">✏️ Editar</button>'
       +'<button class="btn bd" onclick="deletarViagem('+i+')" style="font-size:11px;padding:6px">🗑️ Deletar</button>'
       +'</div>'
       +'</div>';
-  }).join('');
+  }
+  c.innerHTML = html;
 }
 
-async function deletarViagem(i){
-  const v=_listaHist[i];
-  if(!v)return;
-  if(!confirm('Deletar esta viagem?'))return;
-  try{await fbDelete('viagens/'+v._key);await load();renderHist();renderStats();}
-  catch(e){alert('Erro: '+e.message);}
-}
+window.abrirEdicao = function(i) {
+  var v = _listaHist[i];
+  if(!v) return;
+  editIdx = i;
+  document.getElementById('ed-placa').value = v.placa;
+  document.getElementById('ed-dch').value   = v.data_chegada;
+  document.getElementById('ed-hch').value   = v.hora_chegada;
+  document.getElementById('ed-dsa').value   = v.data_saida;
+  document.getElementById('ed-hsa').value   = v.hora_saida;
+  document.getElementById('ed-peso').value  = v.peso_kg||'';
+  document.getElementById('ed-nent').value  = v.nota_entrada||'';
+  document.getElementById('ed-nsai').value  = v.nota_saida||'';
+  function calc(){
+    var dc=document.getElementById('ed-dch').value, hc=document.getElementById('ed-hch').value;
+    var ds=document.getElementById('ed-dsa').value, hs=document.getElementById('ed-hsa').value;
+    if(dc&&hc&&ds&&hs){ var d=(new Date(ds+'T'+hs)-new Date(dc+'T'+hc))/60000; document.getElementById('ed-tempo').textContent=d>=0?Math.round(d):'Inválido'; }
+  }
+  calc();
+  document.getElementById('ed-dch').oninput = calc;
+  document.getElementById('ed-hch').oninput = calc;
+  document.getElementById('ed-dsa').oninput = calc;
+  document.getElementById('ed-hsa').oninput = calc;
+  document.getElementById('medit').classList.add('open');
+};
+
+window.closeEditModal = function() { document.getElementById('medit').classList.remove('open'); editIdx=-1; };
+
+window.confirmarEdicao = function() {
+  var v = _listaHist[editIdx];
+  if(!v) return;
+  var placa = document.getElementById('ed-placa').value.trim().toUpperCase();
+  var dc=document.getElementById('ed-dch').value, hc=document.getElementById('ed-hch').value;
+  var ds=document.getElementById('ed-dsa').value, hs=document.getElementById('ed-hsa').value;
+  var peso=document.getElementById('ed-peso').value;
+  var nent=document.getElementById('ed-nent').value.trim();
+  var nsai=document.getElementById('ed-nsai').value.trim();
+  if(!placa||!dc||!hc||!ds||!hs){ alert('Preencha todos os campos obrigatórios'); return; }
+  var dtE=new Date(dc+'T'+hc), dtS=new Date(ds+'T'+hs);
+  if(dtS<=dtE){ alert('Saída deve ser após chegada'); return; }
+  setBusy('bed', true);
+  var dados = {placa:placa,data_chegada:dc,hora_chegada:hc,data_saida:ds,hora_saida:hs,
+    peso_kg:peso?parseInt(peso):null,nota_entrada:nent,nota_saida:nsai,
+    tempo_min:Math.round((dtS-dtE)/60000),ts:v.ts};
+  fbPut('viagens/'+v._key, dados, function(err){
+    setBusy('bed', false);
+    if(err){ alert('Erro ao salvar: '+err.message); return; }
+    closeEditModal();
+    load(function(){ renderHist(); renderStats(); });
+  });
+};
+
+window.deletarViagem = function(i) {
+  var v = _listaHist[i];
+  if(!v) return;
+  if(!confirm('Deletar esta viagem?')) return;
+  fbDelete('viagens/'+v._key, function(err){
+    if(err){ alert('Erro: '+err.message); return; }
+    load(function(){ renderHist(); renderStats(); });
+  });
+};
 
 // ── STATS ─────────────────────────────────────────────────────────────
-function renderStats(){
-  const c=document.getElementById('statsbox');
-  const filtData=document.getElementById('stats-data').value;
-
-  // Contabiliza pelo dia de SAÍDA
-  let lista=filtData?viagens.filter(v=>v.data_saida===filtData):viagens;
-
-  if(!lista.length){
-    c.innerHTML='<div class="empty"><div class="ei">📊</div>'+(filtData?'Nenhuma viagem neste dia':'Nenhum dado ainda')+'</div>';
-    return;
+function renderStats() {
+  var c = document.getElementById('statsbox');
+  var filtData = document.getElementById('stats-data').value;
+  var lista = filtData ? viagens.filter(function(v){ return v.data_saida===filtData; }) : viagens;
+  if(!lista.length){ c.innerHTML='<div class="empty"><div class="ei">📊</div>'+(filtData?'Nenhuma viagem neste dia':'Nenhum dado')+'</div>'; return; }
+  var tot=lista.length, plcs=0, pesoTot=0, tTot=0;
+  var cnt={}, rapida=lista[0], longa=lista[0];
+  var placasSet = {};
+  for(var i=0;i<lista.length;i++){
+    var v=lista[i];
+    placasSet[v.placa]=1;
+    pesoTot += v.peso_kg||0;
+    tTot += v.tempo_min;
+    cnt[v.placa]=(cnt[v.placa]||0)+1;
+    if(v.tempo_min<rapida.tempo_min) rapida=v;
+    if(v.tempo_min>longa.tempo_min)  longa=v;
   }
-
-  const tot=lista.length,plcs=new Set(lista.map(v=>v.placa)).size;
-  const peso=lista.reduce((s,v)=>s+(v.peso_kg||0),0);
-  const tmed=Math.round(lista.reduce((s,v)=>s+v.tempo_min,0)/tot);
-  const cnt={};lista.forEach(v=>cnt[v.placa]=(cnt[v.placa]||0)+1);
-  const [tp,tq]=Object.entries(cnt).sort((a,b)=>b[1]-a[1])[0];
-  const rapida=lista.reduce((a,b)=>a.tempo_min<b.tempo_min?a:b);
-  const longa =lista.reduce((a,b)=>a.tempo_min>b.tempo_min?a:b);
-  const label=filtData
-    ?'📅 Dados de: <strong>'+new Date(filtData+'T12:00:00').toLocaleDateString('pt-BR')+'</strong>'
-    :'📅 Mostrando <strong>todos os dias</strong>';
-
-  c.innerHTML=
-    '<div class="ib iblue" style="margin-bottom:14px">'+label+'</div>'
+  plcs = Object.keys(placasSet).length;
+  var tmed = Math.round(tTot/tot);
+  var topP='', topQ=0;
+  var ckeys=Object.keys(cnt);
+  for(var i=0;i<ckeys.length;i++){ if(cnt[ckeys[i]]>topQ){ topQ=cnt[ckeys[i]]; topP=ckeys[i]; } }
+  var label = filtData ? '📅 '+new Date(filtData+'T12:00:00').toLocaleDateString('pt-BR') : 'Todos os dias';
+  c.innerHTML = '<div class="ib iblue">'+label+'</div>'
     +'<div class="sg">'
     +'<div class="sc"><div class="sl">VIAGENS</div><div class="sv">'+tot+'</div></div>'
     +'<div class="sc"><div class="sl">PLACAS</div><div class="sv">'+plcs+'</div></div>'
-    +'<div class="sc"><div class="sl">PESO TOTAL</div><div class="sv">'+(peso/1000).toFixed(1)+'</div><div class="sl">toneladas</div></div>'
-    +'<div class="sc"><div class="sl">TEMPO MÉDIO</div><div class="sv">'+tmed+'</div><div class="sl">minutos</div></div>'
+    +'<div class="sc"><div class="sl">PESO TOTAL</div><div class="sv">'+(pesoTot/1000).toFixed(1)+'</div><div class="sl">ton</div></div>'
+    +'<div class="sc"><div class="sl">TEMPO MÉDIO</div><div class="sv">'+tmed+'</div><div class="sl">min</div></div>'
     +'</div>'
-    +'<div class="ib iblue">🏆 <strong>Maior frequência:</strong> '+tp+' — '+tq+' viagem'+(tq>1?'s':'')+'</div>'
-    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:4px">'
+    +'<div class="ib iblue">🏆 <strong>'+topP+'</strong> — '+topQ+' viagem'+(topQ>1?'s':'')+'</div>'
+    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">'
     +'<div style="background:#e8f5e9;border-left:4px solid #4caf50;padding:12px;border-radius:8px">'
     +'<div style="font-size:11px;color:#2e7d32;font-weight:600">⚡ MAIS RÁPIDA</div>'
-    +'<div style="font-size:22px;font-weight:700;color:#2e7d32;margin:4px 0">'+rapida.tempo_min+' min</div>'
-    +'<div style="font-size:11px;color:#555">🔶 '+rapida.placa+'</div>'
-    +'<div style="font-size:11px;color:#555">📅 '+rapida.data_saida+'</div>'
-    +'<div style="font-size:11px;color:#555">🕐 '+rapida.hora_chegada+' → '+rapida.hora_saida+'</div>'
+    +'<div style="font-size:22px;font-weight:700;color:#2e7d32">'+rapida.tempo_min+' min</div>'
+    +'<div style="font-size:11px;color:#555">'+rapida.placa+' · '+rapida.data_saida+'</div>'
+    +'<div style="font-size:11px;color:#555">'+rapida.hora_chegada+' → '+rapida.hora_saida+'</div>'
     +'</div>'
     +'<div style="background:#fff3e0;border-left:4px solid #ff9800;padding:12px;border-radius:8px">'
     +'<div style="font-size:11px;color:#e65100;font-weight:600">🐢 MAIS LONGA</div>'
-    +'<div style="font-size:22px;font-weight:700;color:#e65100;margin:4px 0">'+longa.tempo_min+' min</div>'
-    +'<div style="font-size:11px;color:#555">🔶 '+longa.placa+'</div>'
-    +'<div style="font-size:11px;color:#555">📅 '+longa.data_saida+'</div>'
-    +'<div style="font-size:11px;color:#555">🕐 '+longa.hora_chegada+' → '+longa.hora_saida+'</div>'
-    +'</div>'
-    +'</div>';
+    +'<div style="font-size:22px;font-weight:700;color:#e65100">'+longa.tempo_min+' min</div>'
+    +'<div style="font-size:11px;color:#555">'+longa.placa+' · '+longa.data_saida+'</div>'
+    +'<div style="font-size:11px;color:#555">'+longa.hora_chegada+' → '+longa.hora_saida+'</div>'
+    +'</div></div>';
 }
 
 // ── EXPORT ────────────────────────────────────────────────────────────
-function buildRows(){
-  return viagens.map(v=>({'Placa':v.placa,'Data Chegada':v.data_chegada,'Hora Chegada':v.hora_chegada,
-    'Data Saída':v.data_saida,'Hora Saída':v.hora_saida,'Peso (kg)':v.peso_kg||'',
-    'Tempo (min)':v.tempo_min,'Nota Entrada':v.nota_entrada||'','Nota Saída':v.nota_saida||''}));
-}
+window.expCSV = function() {
+  if(!viagens.length){ alert('Nenhum dado'); return; }
+  var cols=['Placa','Data Chegada','Hora Chegada','Data Saída','Hora Saída','Peso (kg)','Tempo (min)','Nota Entrada','Nota Saída'];
+  var rows=[cols.join(',')];
+  for(var i=0;i<viagens.length;i++){
+    var v=viagens[i];
+    rows.push([v.placa,v.data_chegada,v.hora_chegada,v.data_saida,v.hora_saida,v.peso_kg||'',v.tempo_min,v.nota_entrada||'',v.nota_saida||''].map(function(c){return '"'+c+'"';}).join(','));
+  }
+  dl(new Blob([rows.join('\n')],{type:'text/csv;charset=utf-8;'}),'viagens_'+hoje()+'.csv');
+};
 
-async function expCSV(){
-  await load();
-  if(!viagens.length){alert('Nenhum dado para exportar');return;}
-  const r=buildRows(),cols=Object.keys(r[0]);
-  const csv=[cols.join(','),...r.map(row=>cols.map(k=>'"'+row[k]+'"').join(','))].join('\n');
-  dl(new Blob([csv],{type:'text/csv;charset=utf-8;'}),'viagens_'+hoje()+'.csv');
-}
-
-async function expXLSX(){
-  await load();
-  if(!viagens.length){alert('Nenhum dado para exportar');return;}
-  const ws=XLSX.utils.json_to_sheet(buildRows());
-  const wb=XLSX.utils.book_new();
+window.expXLSX = function() {
+  if(!viagens.length){ alert('Nenhum dado'); return; }
+  var data=viagens.map(function(v){return{'Placa':v.placa,'Data Chegada':v.data_chegada,'Hora Chegada':v.hora_chegada,'Data Saída':v.data_saida,'Hora Saída':v.hora_saida,'Peso (kg)':v.peso_kg||'','Tempo (min)':v.tempo_min,'Nota Entrada':v.nota_entrada||'','Nota Saída':v.nota_saida||''};});
+  var ws=XLSX.utils.json_to_sheet(data);
+  var wb=XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb,ws,'Viagens');
   XLSX.writeFile(wb,'viagens_'+hoje()+'.xlsx');
-}
+};
 
-function dl(blob,name){const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;a.click();}
-function hoje(){return new Date().toISOString().split('T')[0];}
+window.clearAll = function() {
+  if(!confirm('Apagar TODOS os dados?')) return;
+  if(!confirm('Tem certeza?')) return;
+  fbDelete('entradas', function(){ fbDelete('viagens', function(){ load(function(){ renderPend(); renderHist(); renderStats(); }); }); });
+};
 
-async function clearAll(){
-  if(!confirm('Apagar TODOS os dados?'))return;
-  if(!confirm('Tem certeza? Afeta todos os usuários.'))return;
-  try{await Promise.all([fbDelete('entradas'),fbDelete('viagens')]);await load();renderPend();renderHist();renderStats();}
-  catch(e){alert('Erro: '+e.message);}
-}
+function dl(blob,name){ var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=name; a.click(); }
+function hoje(){ return new Date().toISOString().split('T')[0]; }
 
-function setBusy(id,busy){
-  const btn=document.getElementById(id);
-  if(!btn)return;
+function setBusy(id, busy) {
+  var btn=document.getElementById(id);
+  if(!btn) return;
   btn.disabled=busy;
-  const labels={'bentrada':'✅ Registrar Entrada','bsai':'✅ Confirmar Saída','bed':'💾 Salvar Alterações'};
+  var labels={'bentrada':'✅ Registrar Entrada','bsai':'✅ Confirmar Saída','bed':'💾 Salvar'};
   btn.innerHTML=busy?'<span class="spin"></span>Salvando…':labels[id];
 }
 </script>
