@@ -246,7 +246,29 @@ setInterval(async()=>{
   if(id==='sta')renderStats();
 },15000);
 
-(async()=>{document.getElementById('edata').value=hoje();await load();})();
+(async()=>{
+  document.getElementById('edata').value=hoje();
+
+  // Event delegation — Saída e Cancelar
+  document.getElementById('pendlist').addEventListener('click', function(e){
+    const btn=e.target.closest('[data-action]');
+    if(!btn) return;
+    const i=parseInt(btn.dataset.idx);
+    if(btn.dataset.action==='saida')   openModal(_listaPend[i]?._key);
+    if(btn.dataset.action==='cancela') cancelarEntrada(_listaPend[i]?._key);
+  });
+
+  // Event delegation — Editar e Deletar do histórico
+  document.getElementById('histlist').addEventListener('click', function(e){
+    const btn=e.target.closest('[data-action]');
+    if(!btn) return;
+    const i=parseInt(btn.dataset.idx);
+    if(btn.dataset.action==='edit')   openEditModal(i);
+    if(btn.dataset.action==='del')    deletarViagem(i);
+  });
+
+  await load();
+})();
 
 // ── TABS ──────────────────────────────────────────────────────────────
 async function goTab(id,btn){
@@ -292,12 +314,14 @@ function limparEntrada(){
 }
 
 // ── LISTA EM ANDAMENTO ────────────────────────────────────────────────
+let _listaPend = [];
+
 function renderPend(){
   const q=(document.getElementById('ssai').value||'').toUpperCase();
-  const list=entradas.filter(e=>!q||e.placa.includes(q));
+  _listaPend=entradas.filter(e=>!q||e.placa.includes(q));
   const c=document.getElementById('pendlist');
-  if(!list.length){c.innerHTML='<div class="empty"><div class="ei">📭</div>Nenhum caminhão em andamento</div>';return;}
-  c.innerHTML=list.map(e=>{
+  if(!_listaPend.length){c.innerHTML='<div class="empty"><div class="ei">📭</div>Nenhum caminhão em andamento</div>';return;}
+  c.innerHTML=_listaPend.map((e,i)=>{
     const min=Math.round((Date.now()-new Date(e.ts))/60000);
     return '<div class="card pend">'
       +'<div class="ch">'+e.placa+' <span class="badge bwarn">'+min+' min</span></div>'
@@ -306,8 +330,8 @@ function renderPend(){
       +'<div class="ci"><div class="cl">Aguardando</div><div class="cv">'+min+' min</div></div>'
       +'</div>'
       +(e.nota?'<div class="note">📝 '+e.nota+'</div>':'')
-      +'<button class="btn bp" onclick="openModal(\''+e._key+'\')" style="font-size:12px;padding:8px;margin-top:8px">📤 Registrar Saída</button>'
-      +'<button class="btn bd" onclick="cancelarEntrada(\''+e._key+'\')" style="font-size:11px;padding:6px;margin-top:5px">🗑️ Cancelar</button>'
+      +'<button class="btn bp" data-action="saida" data-idx="'+i+'" style="font-size:12px;padding:8px;margin-top:8px">📤 Registrar Saída</button>'
+      +'<button class="btn bd" data-action="cancela" data-idx="'+i+'" style="font-size:11px;padding:6px;margin-top:5px">🗑️ Cancelar</button>'
       +'</div>';
   }).join('');
 }
@@ -454,8 +478,8 @@ function renderHist(){
       +(v.nota_saida?'<div class="note">📤 '+v.nota_saida+'</div>':'')
       +'<div class="note">Registrado: '+new Date(v.ts).toLocaleString('pt-BR')+'</div>'
       +'<div class="btn-row">'
-      +'<button class="btn bp" onclick="openEditModal('+i+')" style="font-size:11px;padding:6px">✏️ Editar</button>'
-      +'<button class="btn bd" onclick="deletarViagem('+i+')" style="font-size:11px;padding:6px">🗑️ Deletar</button>'
+      +'<button class="btn bp" data-action="edit" data-idx="'+i+'" style="font-size:11px;padding:6px">✏️ Editar</button>'
+      +'<button class="btn bd" data-action="del" data-idx="'+i+'" style="font-size:11px;padding:6px">🗑️ Deletar</button>'
       +'</div>'
       +'</div>';
   }).join('');
