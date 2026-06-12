@@ -254,8 +254,10 @@ setInterval(async()=>{
     const btn=e.target.closest('[data-action]');
     if(!btn) return;
     const i=parseInt(btn.dataset.idx);
-    if(btn.dataset.action==='saida')   openModal(_listaPend[i]?._key);
-    if(btn.dataset.action==='cancela') cancelarEntrada(_listaPend[i]?._key);
+    const ent=_listaPend[i];
+    if(!ent) return;
+    if(btn.dataset.action==='saida')   openModal(ent._key);
+    if(btn.dataset.action==='cancela') cancelarEntrada(ent._key);
   });
 
   // Event delegation — Editar e Deletar do histórico
