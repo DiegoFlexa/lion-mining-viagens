@@ -248,27 +248,6 @@ setInterval(async()=>{
 
 (async()=>{
   document.getElementById('edata').value=hoje();
-
-  // Event delegation — Saída e Cancelar
-  document.getElementById('pendlist').addEventListener('click', function(e){
-    const btn=e.target.closest('[data-action]');
-    if(!btn) return;
-    const i=parseInt(btn.dataset.idx);
-    const ent=_listaPend[i];
-    if(!ent) return;
-    if(btn.dataset.action==='saida')   openModal(ent._key);
-    if(btn.dataset.action==='cancela') cancelarEntrada(ent._key);
-  });
-
-  // Event delegation — Editar e Deletar do histórico
-  document.getElementById('histlist').addEventListener('click', function(e){
-    const btn=e.target.closest('[data-action]');
-    if(!btn) return;
-    const i=parseInt(btn.dataset.idx);
-    if(btn.dataset.action==='edit')   openEditModal(i);
-    if(btn.dataset.action==='del')    deletarViagem(i);
-  });
-
   await load();
 })();
 
@@ -323,8 +302,8 @@ function renderPend(){
   _listaPend=entradas.filter(e=>!q||e.placa.includes(q));
   const c=document.getElementById('pendlist');
   if(!_listaPend.length){c.innerHTML='<div class="empty"><div class="ei">📭</div>Nenhum caminhão em andamento</div>';return;}
-  c.innerHTML=_listaPend.map((e,i)=>{
-    const min=Math.round((Date.now()-new Date(e.ts))/60000);
+  c.innerHTML=_listaPend.map(function(e,i){
+    var min=Math.round((Date.now()-new Date(e.ts))/60000);
     return '<div class="card pend">'
       +'<div class="ch">'+e.placa+' <span class="badge bwarn">'+min+' min</span></div>'
       +'<div class="cg">'
@@ -332,22 +311,24 @@ function renderPend(){
       +'<div class="ci"><div class="cl">Aguardando</div><div class="cv">'+min+' min</div></div>'
       +'</div>'
       +(e.nota?'<div class="note">📝 '+e.nota+'</div>':'')
-      +'<button class="btn bp" data-action="saida" data-idx="'+i+'" style="font-size:12px;padding:8px;margin-top:8px">📤 Registrar Saída</button>'
-      +'<button class="btn bd" data-action="cancela" data-idx="'+i+'" style="font-size:11px;padding:6px;margin-top:5px">🗑️ Cancelar</button>'
+      +'<button class="btn bp" onclick="openModal('+i+')" style="font-size:12px;padding:8px;margin-top:8px">📤 Registrar Saída</button>'
+      +'<button class="btn bd" onclick="cancelarEntrada('+i+')" style="font-size:11px;padding:6px;margin-top:5px">🗑️ Cancelar</button>'
       +'</div>';
   }).join('');
 }
 
-async function cancelarEntrada(key){
+async function cancelarEntrada(i){
+  var ent=_listaPend[i];
+  if(!ent) return;
   if(!confirm('Cancelar esta entrada?'))return;
-  try{await fbDelete('entradas/'+key);alerta('asai','✅ Entrada cancelada');await load();renderPend();}
+  try{await fbDelete('entradas/'+ent._key);alerta('asai','✅ Entrada cancelada');await load();renderPend();}
   catch(e){alerta('asai','❌ Erro: '+e.message,'ae');}
 }
 
 // ── MODAL SAÍDA ───────────────────────────────────────────────────────
-function openModal(key){
-  const ent=entradas.find(e=>e._key===key);
-  if(!ent)return;
+function openModal(i){
+  var ent=_listaPend[i];
+  if(!ent) return;
   modalKey=key;
   document.getElementById('minfo').innerHTML='<strong>Placa: '+ent.placa+'</strong><br>Chegada: '+ent.data+' '+ent.hora;
   document.getElementById('mdata').value=ent.data;
@@ -466,8 +447,8 @@ function renderHist(){
   _listaHist=filtrar(viagens.filter(v=>!q||v.placa.includes(q)));
   const c=document.getElementById('histlist');
   if(!_listaHist.length){c.innerHTML='<div class="empty"><div class="ei">📭</div>Nenhuma viagem no período</div>';return;}
-  c.innerHTML=_listaHist.map((v,i)=>{
-    const tons=v.peso_kg?(v.peso_kg/1000).toFixed(2)+' t':'N/A';
+  c.innerHTML=_listaHist.map(function(v,i){
+    var tons=v.peso_kg?(v.peso_kg/1000).toFixed(2)+' t':'N/A';
     return '<div class="card">'
       +'<div class="ch">'+v.placa+' <span class="badge bok">'+v.tempo_min+' min</span></div>'
       +'<div class="cg">'
@@ -480,8 +461,8 @@ function renderHist(){
       +(v.nota_saida?'<div class="note">📤 '+v.nota_saida+'</div>':'')
       +'<div class="note">Registrado: '+new Date(v.ts).toLocaleString('pt-BR')+'</div>'
       +'<div class="btn-row">'
-      +'<button class="btn bp" data-action="edit" data-idx="'+i+'" style="font-size:11px;padding:6px">✏️ Editar</button>'
-      +'<button class="btn bd" data-action="del" data-idx="'+i+'" style="font-size:11px;padding:6px">🗑️ Deletar</button>'
+      +'<button class="btn bp" onclick="openEditModal('+i+')" style="font-size:11px;padding:6px">✏️ Editar</button>'
+      +'<button class="btn bd" onclick="deletarViagem('+i+')" style="font-size:11px;padding:6px">🗑️ Deletar</button>'
       +'</div>'
       +'</div>';
   }).join('');
